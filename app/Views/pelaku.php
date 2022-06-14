@@ -24,6 +24,7 @@
                         <tr>
                         <th>No</th>
                         <th>Nama</th>
+                        <th>Jenis Kelamin</th>
                         <th>Profil</th>
                         <th>Jenis Narkoba</th>
                         <th>Aksi</th>
@@ -34,15 +35,19 @@
                             <tr>
                                 <td><?= $no; $no++ ?></td>
                                 <td><?= $pelaku['nama'] ?></td>
+                                <td><?= $pelaku['jenis_kelamin'] ?></td>
                                 <td><?= $pelaku['profil'] ?></td>
-                                <td> <?= $pelaku['jenis_narkoba'] ?></td>
+                                <td><?php $no=1; foreach ($details as $detail) : ?>
+                                    <?= $detail['id_jenis_narkoba'] ?>
+                                    <?php endforeach ?>
+                                </td>
                                 <td>
-                                    <button type="button" class="btn btn-warning btn-sm btn-icon-text">
+                                    <a href="<?= base_url('admin/pelaku/'.$pelaku['id_pelaku'].'/edit') ?>" type="button" class="btn btn-warning btn-sm btn-icon-text">
                                         <i class="mdi mdi-pencil btn-icon-prepend"></i> Edit 
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-sm btn-icon-text">
+                                    </a>
+                                    <a type="button" class="btn btn-danger btn-sm btn-icon-text" data-href="<?= base_url('admin/pelaku/'.$pelaku['id_pelaku'].'/delete') ?>" onclick="confirmToDelete(this)">
                                         <i class="mdi mdi-close btn-icon-prepend"></i> Hapus 
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -54,4 +59,25 @@
         </div>
     </div>
 </div>
+<div id="confirm-dialog" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h2 class="h2">Are you sure?</h2>
+        <p>The data will be deleted and lost forever</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" role="button" id="delete-button" class="btn btn-danger">Delete</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function confirmToDelete(el){
+    $("#delete-button").attr("href", el.dataset.href);
+    $("#confirm-dialog").modal('show');
+}
+</script>
 <?= $this->endSection() ?>

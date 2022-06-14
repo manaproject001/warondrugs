@@ -36,6 +36,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('admin', 'Admin::index');
 $routes->group('admin', function($routes){
 	$routes->get('dashboard', 'Admin::index');
     $routes->add('kasus/tambah', 'Admin::createKasus');
@@ -43,10 +44,11 @@ $routes->group('admin', function($routes){
 	$routes->add('kasus/(:segment)/edit', 'Admin::editKasus/$1');
 	$routes->get('kasus/(:segment)/delete', 'Admin::deleteKasus/$1');
 
-    $routes->add('pelaku/tambah', 'Admin::createPelaku');
-    $routes->add('pelaku', 'Admin::Pelaku');
-	$routes->add('pelaku/(:segment)/edit', 'Admin::editPelaku/$1');
-	$routes->get('pelaku/(:segment)/delete', 'Admin::deletePelaku/$1');
+    $routes->add('pelaku/tambah', 'Pelaku::createPelaku');
+    $routes->add('pelaku', 'Pelaku::index');
+	$routes->add('pelaku/(:segment)/edit', 'Pelaku::readPelakuEdit/$1');
+    $routes->add('pelaku/(:segment)/editProses', 'Pelaku::updatePelaku/$1');
+	$routes->get('pelaku/(:segment)/delete', 'Pelaku::deletePelaku/$1');
 });
 
 /*

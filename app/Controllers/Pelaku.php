@@ -4,22 +4,18 @@ namespace App\Controllers;
 
 use App\Models\PelakuModel;
 use App\Models\DetailJenisNarkobaModel;
-class Admin extends BaseController
+class Pelaku extends BaseController
 {
+
     public function index()
     {
-        return view('dashboard');
-    }
-
-    public function kasus()
-    {
-        return view('kasus');
-    }
-
-    public function pelaku()
-    {
         $pelaku = new PelakuModel();
-        $data['pelakus'] = $pelaku->findAll();
+        $data['pelakus'] = $pelaku->where('id_pelaku', '1');
+
+        $detail = new DetailJenisNarkobaModel();
+        $data['details'] = $detail->findAll();
+        
+        
 		echo view('pelaku', $data);
     }
 
@@ -27,7 +23,10 @@ class Admin extends BaseController
     {
 		// lakukan validasi
         $validation =  \Config\Services::validation();
-        $validation->setRules(['nama' => 'required']);
+        $validation->setRules([
+            'nama' => 'required',
+            'jenis_kelamin' => 'required'
+        ]);
         $isDataValid = $validation->withRequest($this->request)->run();
 
         $j = $this->request->getPost('jenis_narkoba');
@@ -44,6 +43,7 @@ class Admin extends BaseController
                 "tanggal_lahir" => $this->request->getPost('tanggal_lahir'),
                 "nik" => $this->request->getPost('nik'),
                 "profil" => $this->request->getPost('profil'),
+                "jenis_kelamin" => $this->request->getPost('jenis_kelamin'),
                 // "jenis_narkoba" => array_implode($j),
                 "berat" => $this->request->getPost('berat'),
                 "uang_sita" => $this->request->getPost('uang_sita'),
@@ -82,18 +82,6 @@ class Admin extends BaseController
 
         echo $id;
         die();
-        // ambil artikel yang akan diedit
-        
-        // $pelaku->update($id, [
-        //     "nama" => $this->request->getPost('nama'),
-        //     "tempat_lahir" => $this->request->getPost('tempat_lahir'),
-        //     "tanggal_lahir" => $this->request->getPost('tanggal_lahir'),
-        //     "nik" => $this->request->getPost('nik')
-        // ]);
-        // echo "<pre>";
-        // print_r($pelaku);
-        // die();
-        // lakukan validasi data artikel
         $pelaku = new PelakuModel();
         $validation =  \Config\Services::validation();
         $validation->setRules(['nama' => 'required']);
@@ -119,13 +107,32 @@ class Admin extends BaseController
     function updatePelaku($id)
     {
          // Proses Update Pelaku
-         $pelaku = new PelakuModel();
-         
-             $pelaku->update($id, [
-                 "nama" => $this->request->getPost('nama'),
-                 "nik" => $this->request->getPost('nik')
-             ]);
-             return redirect('admin/pelaku');
-         
+        $pelaku = new PelakuModel();
+        $validation =  \Config\Services::validation();
+        $validation->setRules(['nama' => 'required']);
+        $isDataValid = $validation->withRequest($this->request)->run();
+        if($isDataValid){
+            $pelaku->update($id, [
+                "nama" => $this->request->getPost('nama'),
+                "tempat_lahir" => $this->request->getPost('tempat_lahir'),
+                "tanggal_lahir" => $this->request->getPost('tanggal_lahir'),
+                "nik" => $this->request->getPost('nik'),
+                "profil" => $this->request->getPost('profil'),
+                "jenis_kelamin" => $this->request->getPost('jenis_kelamin'),
+                // "jenis_narkoba" => array_implode($j),
+                "berat" => $this->request->getPost('berat'),
+                "uang_sita" => $this->request->getPost('uang_sita'),
+                "tkp" => $this->request->getPost('tkp'),
+                "kewarganegaraan" => $this->request->getPost('kewarganegaraan'),
+                "unit" => $this->request->getPost('unit')
+            ]);
+            return redirect('admin/pelaku');
+        }
+    }
+
+    public function deletePelaku($id){
+        $pelaku = new PelakuModel();
+        $pelaku->delete($id);
+        return redirect('admin/pelaku');
     }
 }
