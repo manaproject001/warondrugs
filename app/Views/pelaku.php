@@ -19,7 +19,7 @@
                 <h4 class="card-title">Data Pelaku</h4>
                 </p>
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="example">
                     <thead>
                         <tr>
                         <th>No</th>

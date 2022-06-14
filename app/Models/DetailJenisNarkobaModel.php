@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class DetailJenisNarkobaModel extends Model
 {
     protected $table      = 'det_jenis_narkoba';
-
+    protected $primaryKey = 'id_pelaku';
     protected $allowedFields = ['id_pelaku', 'id_jenis_narkoba'];
 
     

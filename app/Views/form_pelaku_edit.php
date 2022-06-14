@@ -92,13 +92,22 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Jenis Narkoba</label>
+                                    <label class="col-sm-3 col-form-label">Jenis Narkoba </label>
                                     <div class="col-sm-9">
                                         <select name="jenis_narkoba[]" class="js-example-basic-multiple" style="width:100%" required  multiple="multiple">
-                                            <option>Sabu-sabu</option>
-                                            <option>Ganja</option>
-                                            <option>Heroin</option>
-                                            <option>Ekstasi</option>
+                                            <?php 
+                                                if($pelaku['narkoba']!=""){
+                                                    $ar=explode(",",$pelaku['narkoba']);
+                                                }else{
+                                                    $ar=[];
+                                                }
+                                                function cek($txt,$a){if (in_array($txt, $a)){echo "Selected";}else{echo "";}
+                                                }
+                                            ?>
+                                            <option value="1"<?php cek('Sabu-sabu',$ar) ?>>Sabu-sabu</option>
+                                            <option value="2"<?php cek('Ganja',$ar) ?>>Ganja</option>
+                                            <option value="3"<?php cek('Heroin',$ar) ?>>Heroin</option>
+                                            <option value="4"<?php cek('Ekstasi',$ar) ?>>Ekstasi</option>
                                         </select>
                                     </div>
                                 </div>

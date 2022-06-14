@@ -72,7 +72,7 @@ class Pelaku extends BaseController
 
     public function readPelakuEdit($id)
     {
-        $pelaku = new PelakuModel();
+        $pelaku = new PelakuViewModel();
         $data['pelaku'] = $pelaku->where('id_pelaku', $id)->first();
         echo view('form_pelaku_edit', $data);
     }
@@ -127,6 +127,20 @@ class Pelaku extends BaseController
                 "kewarganegaraan" => $this->request->getPost('kewarganegaraan'),
                 "unit" => $this->request->getPost('unit')
             ]);
+            
+            $jenis = new DetailJenisNarkobaModel();
+            $jenis->delete($id);
+
+            $id_pelaku = $id;
+            $jenis_narkoba = count($this->request->getPost('jenis_narkoba'));
+            for ($i = 0; $i < $jenis_narkoba; $i++) {
+                $datas[$i] = array(
+                    'id_pelaku' => $id_pelaku,
+                    'id_jenis_narkoba' => $this->request->getPost('jenis_narkoba[' . $i . ']')
+                );
+                $jenis = new DetailJenisNarkobaModel();
+                $jenis->insert($datas[$i]);
+            }
             return redirect('admin/pelaku');
         }
     }

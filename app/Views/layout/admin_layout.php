@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="<?= base_url('assets/images/favicon.png')?>" />
+    <!-- datatables -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
   </head>
   <body>
     <div class="container-scroller">
@@ -93,5 +96,13 @@
     <script src="<?=base_url('assets/js/typeahead.js')?>"></script>
     <script src="<?=base_url('assets/js/select2.js')?>"></script>
     <!-- End Form -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+      $(document).ready(function () {
+          $('#example').DataTable();
+      });
+    </script>
   </body>
 </html>
