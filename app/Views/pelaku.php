@@ -37,10 +37,7 @@
                                 <td><?= $pelaku['nama'] ?></td>
                                 <td><?= $pelaku['jenis_kelamin'] ?></td>
                                 <td><?= $pelaku['profil'] ?></td>
-                                <td><?php $no=1; foreach ($details as $detail) : ?>
-                                    <?= $detail['id_jenis_narkoba'] ?>
-                                    <?php endforeach ?>
-                                </td>
+                                <td><?= $pelaku['narkoba'] ?></td>
                                 <td>
                                     <a href="<?= base_url('admin/pelaku/'.$pelaku['id_pelaku'].'/edit') ?>" type="button" class="btn btn-warning btn-sm btn-icon-text">
                                         <i class="mdi mdi-pencil btn-icon-prepend"></i> Edit 

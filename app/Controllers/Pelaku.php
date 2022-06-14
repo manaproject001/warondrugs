@@ -4,17 +4,18 @@ namespace App\Controllers;
 
 use App\Models\PelakuModel;
 use App\Models\DetailJenisNarkobaModel;
+use App\Models\PelakuViewModel;
 class Pelaku extends BaseController
 {
 
     public function index()
     {
-        $pelaku = new PelakuModel();
-        $data['pelakus'] = $pelaku->where('id_pelaku', '1');
+        $pelaku = new PelakuViewModel();
+        $data['pelakus'] = $pelaku->findAll();
 
         $detail = new DetailJenisNarkobaModel();
         $data['details'] = $detail->findAll();
-        
+        // isset($data['pelakus']) ? count($data['pelakus']) : 0;
         
 		echo view('pelaku', $data);
     }
