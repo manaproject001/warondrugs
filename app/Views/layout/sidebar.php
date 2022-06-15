@@ -25,12 +25,18 @@
         </a>
     </li>
     <li class="nav-item menu-items">
-        <a class="nav-link" href="<?=site_url('admin/kasus')?>">
+        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
             <span class="menu-icon">
-            <i class="mdi mdi-playlist-play"></i>
-            </span>
-            <span class="menu-title">Data Kasus</span>
+                <i class="mdi mdi-laptop"></i>
+            </span>Data Kasus</span>
+            <i class="menu-arrow"></i>
         </a>
+        <div class="collapse" id="ui-basic">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?=site_url('admin/kasus')?>">Kasus</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?=site_url('admin/jaringan_kasus')?>">Jaringan Kasus</a></li>
+            </ul>
+        </div>
     </li>
     <li class="nav-item menu-items">
         <a class="nav-link" href="<?=site_url('admin/pelaku')?>">

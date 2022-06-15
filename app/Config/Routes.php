@@ -36,13 +36,14 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('admin', 'Admin::index');
-$routes->group('admin', function($routes){
+$routes->group('admin',['filter' => 'auth'], function($routes){
 	$routes->get('dashboard', 'Admin::index');
     $routes->add('kasus/tambah', 'Admin::createKasus');
     $routes->add('kasus', 'Admin::kasus');
 	$routes->add('kasus/(:segment)/edit', 'Admin::editKasus/$1');
 	$routes->get('kasus/(:segment)/delete', 'Admin::deleteKasus/$1');
+
+    $routes->get('jaringan_kasus/', 'Admin::jaringanKasus');
 
     $routes->add('pelaku/tambah', 'Pelaku::createPelaku');
     $routes->add('pelaku', 'Pelaku::index');
@@ -51,7 +52,7 @@ $routes->group('admin', function($routes){
 	$routes->get('pelaku/(:segment)/delete', 'Pelaku::deletePelaku/$1');
 });
 
-$routes->group('admin/data', function($routes){
+$routes->group('admin/data',['filter' => 'auth'], function($routes){
 	$routes->add('jenis_narkoba', 'Data::jenis_narkoba');
     $routes->add('jenis_narkoba/create', 'Data::createJenisNarkoba');
     $routes->get('jenis_narkoba/(:segment)/delete', 'Data::deleteJenisNarkoba/$1');
@@ -59,12 +60,12 @@ $routes->group('admin/data', function($routes){
 });
 
 //Auth
-$routes->add('auth/logout', 'Auth::logout');
-$routes->add('auth/login', 'Auth::login');
-$routes->add('auth/valid_login', 'Auth::valid_login');
-$routes->add('auth/register', 'Auth::register');
-$routes->add('auth/valid_register', 'Auth::valid_register');
-$routes->add('user', 'User::index');
+$routes->get('/register', 'Register::index');
+$routes->add('/register/save', 'Register::save');
+$routes->get('/login', 'Login::index');
+$routes->add('/login/auth', 'Login::auth');
+$routes->add('/logout', 'Login::logout');
+
 
 /*
  * --------------------------------------------------------------------

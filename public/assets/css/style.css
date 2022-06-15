@@ -11563,11 +11563,11 @@ textarea.is-invalid.tt-hint {
     color: #523600; }
 
 .alert-danger {
-  color: #97282c;
-  background-color: #fed9db;
-  border-color: #fec6c9; }
+  color: #fb535b;
+  background-color: #421112;
+  border-color: #ee0410; }
   .alert-danger .alert-link {
-    color: #792023; }
+    color: #fec6c9; }
 
 .alert-light {
   color: #666666;

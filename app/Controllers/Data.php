@@ -4,11 +4,16 @@ use App\Models\JenisNarkobaModel;
 
 class Data extends BaseController
 {
+    public function __construct()
+    {
+        $this->session = session();
+    }
+
     public function jenis_narkoba()
     {
         $jenisNarkoba = new JenisNarkobaModel();
         $data['jenisnarkoba'] = $jenisNarkoba->findAll();
-
+        $data['username'] = $this->session->get("username");
         echo view('jenis_narkoba', $data);
     }
 

@@ -31,28 +31,44 @@
           <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
             <div class="card col-lg-4 mx-auto">
               <div class="card-body px-5 py-5">
-                <h1>Sign Up</h1>
-                <?php if(isset($validation)):?>
-                    <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
-                <?php endif;?>
-                <form action="/register/save" method="post">
-                    <div class="mb-3">
-                        <label for="InputForName" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control" id="InputForName" value="<?= set_value('name') ?>">
+                <h3 class="card-title text-left mb-3">Login</h3>
+                <?php if($username){ ?>
+                    <p style="color:red"><?php echo $username?></p>
+                <?php } ?>
+                
+                <?php if($password){ ?>
+                    <p style="color:red"><?php echo $password?></p>
+                <?php } ?>
+                
+                <?php if($login){ ?>
+                    <p style="color:green"><?php echo $login?></p>
+                <?php } ?>
+                <form action="/auth/valid_login">
+                  <div class="form-group">
+                    <label>Username or email *</label>
+                    <input type="text" name="username" class="form-control p_input">
+                  </div>
+                  <div class="form-group">
+                    <label>Password *</label>
+                    <input type="text" name="password" class="form-control p_input">
+                  </div>
+                  <!-- <div class="form-group d-flex align-items-center justify-content-between">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input"> Remember me </label>
                     </div>
-                    <div class="mb-3">
-                        <label for="InputForEmail" class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control" id="InputForEmail" value="<?= set_value('email') ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="InputForPassword" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="InputForPassword">
-                    </div>
-                    <div class="mb-3">
-                        <label for="InputForConfPassword" class="form-label">Confirm Password</label>
-                        <input type="password" name="confpassword" class="form-control" id="InputForConfPassword">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <a href="#" class="forgot-pass">Forgot password</a>
+                  </div> -->
+                  <div class="text-center">
+                    <button type="submit" name="login" class="btn btn-primary btn-block enter-btn">Login</button>
+                  </div>
+                  <!-- <div class="d-flex">
+                    <button class="btn btn-facebook me-2 col">
+                      <i class="mdi mdi-facebook"></i> Facebook </button>
+                    <button class="btn btn-google col">
+                      <i class="mdi mdi-google-plus"></i> Google plus </button>
+                  </div> -->
+                  <p class="sign-up">Don't have an Account?<a href="/auth/register"> Sign Up</a></p>
                 </form>
               </div>
             </div>
@@ -78,6 +94,3 @@
     <!-- endinject -->
   </body>
 </html>
-        
-        
-     
