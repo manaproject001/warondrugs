@@ -51,6 +51,13 @@ $routes->group('admin', function($routes){
 	$routes->get('pelaku/(:segment)/delete', 'Pelaku::deletePelaku/$1');
 });
 
+$routes->group('admin/data', function($routes){
+	$routes->add('jenis_narkoba', 'Data::jenis_narkoba');
+    $routes->add('jenis_narkoba/create', 'Data::createJenisNarkoba');
+    $routes->get('jenis_narkoba/(:segment)/delete', 'Data::deleteJenisNarkoba/$1');
+    $routes->add('jenis_narkoba/(:segment)/edit', 'Data::editJenisNarkoba/$1');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

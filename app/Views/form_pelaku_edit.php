@@ -104,10 +104,9 @@
                                                 function cek($txt,$a){if (in_array($txt, $a)){echo "Selected";}else{echo "";}
                                                 }
                                             ?>
-                                            <option value="1"<?php cek('Sabu-sabu',$ar) ?>>Sabu-sabu</option>
-                                            <option value="2"<?php cek('Ganja',$ar) ?>>Ganja</option>
-                                            <option value="3"<?php cek('Heroin',$ar) ?>>Heroin</option>
-                                            <option value="4"<?php cek('Ekstasi',$ar) ?>>Ekstasi</option>
+                                            <?php foreach ($jeniss as $jen) : ?>
+                                                <option value="<?=$jen['id_jenis_narkoba']?>" <?php cek($jen['jenis_narkoba'],$ar) ?>><?=$jen['jenis_narkoba']?></option>
+                                            <?php endforeach ?> 
                                         </select>
                                     </div>
                                 </div>

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\PelakuModel;
 use App\Models\DetailJenisNarkobaModel;
+use App\Models\JenisNarkobaModel;
 use App\Models\PelakuViewModel;
 class Pelaku extends BaseController
 {
@@ -16,6 +17,8 @@ class Pelaku extends BaseController
         $detail = new DetailJenisNarkobaModel();
         $data['details'] = $detail->findAll();
         // isset($data['pelakus']) ? count($data['pelakus']) : 0;
+
+        
         
 		echo view('pelaku', $data);
     }
@@ -62,46 +65,22 @@ class Pelaku extends BaseController
                 $jenis = new DetailJenisNarkobaModel();
                 $jenis->insert($datas[$i]);
             }
-
+            
             return redirect('admin/pelaku');
         }
-		
+		$jenis = new JenisNarkobaModel();
+        $data['jeniss'] = $jenis->findAll();
         // tampilkan form create
-        echo view('form_pelaku');
+        echo view('form_pelaku', $data);
     }
 
     public function readPelakuEdit($id)
     {
         $pelaku = new PelakuViewModel();
         $data['pelaku'] = $pelaku->where('id_pelaku', $id)->first();
+        $jenis = new JenisNarkobaModel();
+        $data['jeniss'] = $jenis->findAll();
         echo view('form_pelaku_edit', $data);
-    }
-
-    public function editPelaku()
-    {
-        $id = $this->uri->getSegment(3);
-
-        echo $id;
-        die();
-        $pelaku = new PelakuModel();
-        $validation =  \Config\Services::validation();
-        $validation->setRules(['nama' => 'required']);
-        $isDataValid = $validation->withRequest($this->request)->run();
-  
-        // jika data vlid, maka simpan ke database
-        if($isDataValid){
-            $pelaku->update($id, [
-                "nama" => $this->request->getPost('nama'),
-                "tempat_lahir" => $this->request->getPost('tempat_lahir'),
-                "tanggal_lahir" => $this->request->getPost('tanggal_lahir'),
-                "nik" => $this->request->getPost('nik')
-            ]);
-            echo "<pre>";
-            print_r($pelaku);
-            die();
-            // return redirect('admin/pelaku');
-        }
-        // echo view('form_pelaku_edit', $data);
     }
 
     
@@ -141,6 +120,7 @@ class Pelaku extends BaseController
                 $jenis = new DetailJenisNarkobaModel();
                 $jenis->insert($datas[$i]);
             }
+           
             return redirect('admin/pelaku');
         }
     }
@@ -148,6 +128,7 @@ class Pelaku extends BaseController
     public function deletePelaku($id){
         $pelaku = new PelakuModel();
         $pelaku->delete($id);
+        session()->setFlashdata('success', 'Berkas Berhasil Dihapus');
         return redirect('admin/pelaku');
     }
 }

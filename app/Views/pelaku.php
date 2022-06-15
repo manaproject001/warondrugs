@@ -3,6 +3,7 @@
 <div class="content-wrapper">
     <div class="page-header">
         <h3 class="page-title"> Daftar Pelaku </h3>
+        <!-- <button onclick="myFunct();">Try Sweet Alert</button> -->
         <a class="nav-link btn btn-success create-new-button" href="<?=site_url('admin/pelaku/tambah')?>">+ Input Pelaku</a>
         <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -60,8 +61,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <h2 class="h2">Are you sure?</h2>
-        <p>The data will be deleted and lost forever</p>
+        <h2 class="h2">Anda yakin ingin menghapus?</h2>
+        <p>Data akan hilang</p>
       </div>
       <div class="modal-footer">
         <a href="#" role="button" id="delete-button" class="btn btn-danger">Delete</a>
@@ -77,4 +78,12 @@ function confirmToDelete(el){
     $("#confirm-dialog").modal('show');
 }
 </script>
+<script>
+      function myFunct(){
+        <?php echo 'swal("Good job!", "You clicked the button!", "success")';
+        ?>
+        
+      }
+    </script>
+
 <?= $this->endSection() ?>

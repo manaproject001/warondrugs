@@ -95,10 +95,9 @@
                                     <label class="col-sm-3 col-form-label">Jenis Narkoba</label>
                                     <div class="col-sm-9">
                                         <select name="jenis_narkoba[]" class="js-example-basic-multiple" style="width:100%" required  multiple="multiple">
-                                            <option value="1">Sabu-sabu</option>
-                                            <option value="2">Ganja</option>
-                                            <option value="3">Heroin</option>
-                                            <option value="4">Ekstasi</option>
+                                        <?php foreach ($jeniss as $jen) : ?>
+                                            <option value="<?=$jen['id_jenis_narkoba']?>"><?=$jen['jenis_narkoba']?></option>
+                                        <?php endforeach ?>    
                                         </select>
                                     </div>
                                 </div>

@@ -11393,10 +11393,10 @@ textarea.is-invalid.tt-hint {
 .jsgrid .jsgrid-pager .jsgrid-pager-page a {
   position: relative;
   display: block;
-  color: #0d6efd;
+  color: #91acc7;
   text-decoration: none;
-  background-color: #000000;
-  border: 1px solid #dee2e6;
+  background-color: #0f1015;
+  border: 1px solid #696969;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
   @media (prefers-reduced-motion: reduce) {
     .page-link, .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a,
@@ -11405,14 +11405,14 @@ textarea.is-invalid.tt-hint {
   .page-link:hover, .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a:hover,
   .jsgrid .jsgrid-pager .jsgrid-pager-page a:hover {
     z-index: 2;
-    color: #0a58ca;
-    background-color: #e9ecef;
-    border-color: #dee2e6; }
+    color: #e9ecef;
+    background-color: #009424;
+    border-color: #121a1a; }
   .page-link:focus, .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a:focus,
   .jsgrid .jsgrid-pager .jsgrid-pager-page a:focus {
     z-index: 3;
-    color: #0a58ca;
-    background-color: #e9ecef;
+    color: #e9ecef;
+    background-color: #121a1a;
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); }
 
@@ -11426,16 +11426,16 @@ textarea.is-invalid.tt-hint {
 .jsgrid .jsgrid-pager .active.jsgrid-pager-page a {
   z-index: 3;
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd; }
+  background-color: #005424;
+  border-color: #005424; }
 
 .page-item.disabled .page-link, .jsgrid .jsgrid-pager .disabled.jsgrid-pager-nav-button .page-link, .jsgrid .jsgrid-pager .disabled.jsgrid-pager-page .page-link, .page-item.disabled .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a, .jsgrid .jsgrid-pager .jsgrid-pager-nav-button .page-item.disabled a, .jsgrid .jsgrid-pager .disabled.jsgrid-pager-nav-button a,
 .page-item.disabled .jsgrid .jsgrid-pager .jsgrid-pager-page a, .jsgrid .jsgrid-pager .jsgrid-pager-page .page-item.disabled a,
 .jsgrid .jsgrid-pager .disabled.jsgrid-pager-page a {
-  color: #6c757d;
+  color: #91acc7;
   pointer-events: none;
-  background-color: #fff;
-  border-color: #dee2e6; }
+  background-color: #2d2d3a;
+  border-color: #121a1a; }
 
 .page-link, .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a,
 .jsgrid .jsgrid-pager .jsgrid-pager-page a {
