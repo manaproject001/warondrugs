@@ -58,6 +58,14 @@ $routes->group('admin/data', function($routes){
     $routes->add('jenis_narkoba/(:segment)/edit', 'Data::editJenisNarkoba/$1');
 });
 
+//Auth
+$routes->add('auth/logout', 'Auth::logout');
+$routes->add('auth/login', 'Auth::login');
+$routes->add('auth/valid_login', 'Auth::valid_login');
+$routes->add('auth/register', 'Auth::register');
+$routes->add('auth/valid_register', 'Auth::valid_register');
+$routes->add('user', 'User::index');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

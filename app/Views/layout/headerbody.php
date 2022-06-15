@@ -39,7 +39,8 @@
                 <i class="mdi mdi-logout text-danger"></i>
               </div>
             </div>
-            <div class="preview-item-content">
+            <!-- <a href="/auth/logout"></a> -->
+            <div class="preview-item-content" onclick="window.location.href = 'auth/logout';">
               <p class="preview-subject mb-1">Log out</p>
             </div>
           </a>
