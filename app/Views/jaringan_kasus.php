@@ -29,11 +29,13 @@ var chart = new OrgChart(document.getElementById("tree"), {
    
     mode: 'dark',
     mouseScrool: OrgChart.none,
+   
     nodeBinding: {
         field_0: "Employee Name",
         field_1: "Title",
         img_0: "Photo"
     },
+    
     nodeMenu: {
         details: { text: "Details" },
         add: { text: "Add" },

@@ -1,6 +1,21 @@
 <?= $this->extend('layout/admin_layout') ?>
 <?= $this->section('content') ?>
 <div class="content-wrapper">
+<?php
+    if(session()->getFlashData('success')){
+    ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?= session()->getFlashData('success') ?>
+        
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        
+      </button>
+    </div>
+    <?php echo '<script>swal("Good job!", "You clicked the button!", "success")</script>';
+        ?>
+    <?php
+    }
+?>
     <div class="page-header">
         <h3 class="page-title"> Jenis Narkoba </h3>
         <button type="button" class="nav-link btn btn-success create-new-button" data-bs-toggle="modal" data-bs-target="#exampleModal">Input Jenis Narkoba</button>

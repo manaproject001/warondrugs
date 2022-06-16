@@ -19,6 +19,8 @@
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="<?=base_url('assets/vendors/select2/select2.min.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')?>">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -29,6 +31,10 @@
     <!-- datatables -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-org-chart@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-flextree@2.1.2/build/d3-flextree.js"></script>
   </head>
   <body>
     <div class="container-scroller">
@@ -62,7 +68,7 @@
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="<?= base_url('assets/vendors/chart.js/Chart.min.js')?>"></script>
-    <script src="<?= base_url('assets/vendors/progressbar.js/progressbar.min.js')?>"></script>
+   
     <script src="<?= base_url('assets/vendors/jvectormap/jquery-jvectormap.min.js')?>"></script>
     <script src="<?= base_url('assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js')?>"></script>
     <script src="<?= base_url('assets/vendors/owl-carousel-2/owl.carousel.min.js')?>"></script>
@@ -71,20 +77,14 @@
     <!-- inject:js -->
     <script src="<?= base_url('assets/js/off-canvas.js')?>"></script>
     <script src="<?= base_url('assets/js/hoverable-collapse.js')?>"></script>
-    <script src="<?= base_url('assets/js/misc.js')?>"></script>
+    
     <script src="<?= base_url('assets/js/settings.js')?>"></script>
     <script src="<?= base_url('assets/js/todolist.js')?>"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="<?= base_url('assets/js/dashboard.js')?>"></script>
     <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="<?=base_url('assets/js/off-canvas.js')?>"></script>
-    <script src="<?=base_url('assets/js/hoverable-collapse.js')?>"></script>
-    <script src="<?=base_url('assets/js/misc.js')?>"></script>
-    <script src="<?=base_url('assets/js/settings.js')?>"></script>
-    <script src="<?=base_url('assets/js/todolist.js')?>"></script>
-    <!-- endinject -->
+    
     <!-- Custom js for this page -->
     <script src="<?=base_url('assets/js/chart.js')?>"></script>
 
@@ -96,17 +96,25 @@
     <script src="<?=base_url('assets/js/file-upload.js')?>"></script>
     <script src="<?=base_url('assets/js/typeahead.js')?>"></script>
     <script src="<?=base_url('assets/js/select2.js')?>"></script>
+    <script src="<?=base_url('assets/js/main.js')?>"></script>
     <!-- End Form -->
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
     
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+    
+    <!-- Org Chart -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-org-chart@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-flextree@2.1.2/build/d3-flextree.js"></script>
+    <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
     <script>
       $(document).ready(function () {
           $('#example').DataTable();
       });
     </script>
-    
+
   </body>
 </html>

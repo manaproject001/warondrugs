@@ -6,8 +6,17 @@ use App\Models\PelakuModel;
 use App\Models\DetailJenisNarkobaModel;
 use App\Models\JenisNarkobaModel;
 use App\Models\PelakuViewModel;
+use Config\Services;
+
 class Pelaku extends BaseController
 {
+    public function __construct()
+    {
+        $session = Services::session();
+        $this->session = session();
+        
+    }
+
 
     public function index()
     {
@@ -65,7 +74,7 @@ class Pelaku extends BaseController
                 $jenis = new DetailJenisNarkobaModel();
                 $jenis->insert($datas[$i]);
             }
-            
+            $this->session->setFlashdata('success', 'Data Berhasil Ditambah');
             return redirect('admin/pelaku');
         }
 		$jenis = new JenisNarkobaModel();
@@ -120,7 +129,7 @@ class Pelaku extends BaseController
                 $jenis = new DetailJenisNarkobaModel();
                 $jenis->insert($datas[$i]);
             }
-           
+            session()->setFlashdata('success', 'Berkas Berhasil Diupdate');
             return redirect('admin/pelaku');
         }
     }

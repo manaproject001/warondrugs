@@ -1,8 +1,23 @@
 <?= $this->extend('layout/admin_layout') ?>
 <?= $this->section('content') ?>
 <div class="content-wrapper">
+<?php
+    if(session()->getFlashData('success')){
+    ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?= session()->getFlashData('success') ?>
+        
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        
+      </button>
+    </div>
+    <?php echo '<script>swal("Good job!", "You clicked the button!", "success")</script>';
+        ?>
+    <?php
+    }
+    ?>
     <div class="page-header">
-        <h3 class="page-title"> Daftar Pelaku </h3>
+        <h3 class="page-title" onclick="myFunct()"> Daftar Pelaku </h3>
         <!-- <button onclick="myFunct();">Try Sweet Alert</button> -->
         <a class="nav-link btn btn-success create-new-button" href="<?=site_url('admin/pelaku/tambah')?>">+ Input Pelaku</a>
         <nav aria-label="breadcrumb">
@@ -57,6 +72,7 @@
         </div>
     </div>
 </div>
+
 <div id="confirm-dialog" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

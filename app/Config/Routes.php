@@ -66,6 +66,8 @@ $routes->get('/login', 'Login::index');
 $routes->add('/login/auth', 'Login::auth');
 $routes->add('/logout', 'Login::logout');
 
+$routes->get('/baru', 'Admin::baru');
+
 
 /*
  * --------------------------------------------------------------------

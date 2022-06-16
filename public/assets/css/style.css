@@ -11542,9 +11542,9 @@ textarea.is-invalid.tt-hint {
     color: #494b4b; }
 
 .alert-success {
-  color: #005424;
-  background-color: #ccf6de;
-  border-color: #b3f2ce; }
+  color: #ccf6de;
+  background-color: #005424;
+  border-color: #005424; }
   .alert-success .alert-link {
     color: #00431d; }
 
@@ -11565,7 +11565,7 @@ textarea.is-invalid.tt-hint {
 .alert-danger {
   color: #fb535b;
   background-color: #421112;
-  border-color: #ee0410; }
+  border-color: #421112; }
   .alert-danger .alert-link {
     color: #fec6c9; }
 

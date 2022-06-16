@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+use App\Models\PelakuViewModel;
 use App\Models\JenisNarkobaModel;
 
 class Data extends BaseController
@@ -34,6 +35,7 @@ class Data extends BaseController
                 "jenis_narkoba" => $this->request->getPost('jenis_narkoba')
             ]);
             $data['jenisnarkoba'] = $jenisNarkoba->findAll();
+            session()->setFlashdata('success', 'Berkas Berhasil Ditambahkan');
             return redirect('admin/data/jenis_narkoba');
         }
     }
@@ -49,6 +51,7 @@ class Data extends BaseController
             $jenis->update($id, [
                 "jenis_narkoba" => $this->request->getPost('jenis_narkoba')
             ]);
+            session()->setFlashdata('success', 'Berkas Berhasil Diubah');
             return redirect('admin/data/jenis_narkoba');
         }
     }
@@ -57,6 +60,7 @@ class Data extends BaseController
         $jenisNarkoba = new JenisNarkobaModel();
         $jenisNarkoba->delete($id);
         $data['jenisnarkoba'] = $jenisNarkoba->findAll();
+        session()->setFlashdata('success', 'Berkas Berhasil Dihapus');
         return redirect('admin/data/jenis_narkoba');
     }
 
