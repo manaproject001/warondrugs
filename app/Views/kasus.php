@@ -1,12 +1,15 @@
 <?= $this->extend('layout/admin_layout') ?>
 <?= $this->section('content') ?>
 <div class="content-wrapper">
+<?php echo view('v_alert');?>
     <div class="page-header">
-        <h3 class="page-title"> Daftar Kasus </h3>
+        <h3 class="page-title"> Jenis Narkoba </h3>
+        <button type="button" class="nav-link btn btn-success create-new-button" data-bs-toggle="modal" data-bs-target="#exampleModal">Input Jenis Narkoba</button>
+        
         <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Tables</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Basic tables</li>
+            <li class="breadcrumb-item"><a href="#">Pelaku</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Daftar Pelaku</li>
         </ol>
         </nav>
     </div>
@@ -15,84 +18,121 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Hoverable Table</h4>
-                    <div class="chart-container" style=" background-color: #0c1016"></div>
+                <h4 class="card-title">Data Kasus</h4>
+                </p>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="example">
+                    <thead>
+                        <tr>
+                        <th>No</th>
+                        <th>Kasus</th>
+                        <th>Deskripsi</th>
+                        <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no=1; foreach ($kasuss as $kasus) : ?>
+                            <tr>
+                                <td><?= $no; $no++ ?></td>
+                                <td><?= $kasus['kasus'] ?></td>
+                                <td><?= $kasus['deskripsi'] ?></td>
+                                <td>
+                                    <button data-bs-toggle="modal" data-bs-target="#edit<?=$kasus['id_kasus']?>" type="button" class="btn btn-warning btn-sm btn-icon-text">
+                                        <i class="mdi mdi-pencil btn-icon-prepend"></i> Edit 
+                                    </button>
+                                    <a type="button" class="btn btn-danger btn-sm btn-icon-text" data-href="<?= base_url('admin/data/jenis_narkoba/'.$kasus['id_kasus'].'/delete') ?>" onclick="confirmToDelete(this)">
+                                        <i class="mdi mdi-close btn-icon-prepend"></i> Hapus 
+                                    </a>
+                                    <a type="button" class="btn btn-success btn-sm btn-icon-text" data-href="<?= base_url('admin/data/jaringan/'.$kasus['id_kasus']) ?>">
+                                        <i class="mdi mdi-magnify btn-icon-prepend"></i> Detail Jaringan 
+                                    </a>
+                                    <div class="modal fade" id="edit<?=$kasus['id_kasus']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Edit Data Kasus</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-sample" action="<?=base_url('admin/data/kasus/'.$kasus['id_kasus'].'/edit')?>" method="post" id="text-editor">
+                                                <div class="mb-3">
+                                                    <label for="kasus" class="col-form-label">Kasus :</label>
+                                                    <input type="text" class="form-control" id="kasus" name="kasus" value="<?=$kasus['kasus']?>">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="deskripsi" class="col-form-label">Deskripsi :</label>
+                                                    <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="<?=$kasus['deskripsi']?>">
+                                                </div>
+                                            </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" name="status" value="simpan" class="btn btn-success">Simpan</button>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                    </table>
+                </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div id="confirm-dialog" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h2 class="h2">Anda yakin ingin menghapus?</h2>
+        <p>Data akan hilang</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" role="button" id="delete-button" class="btn btn-danger">Delete</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Input Data jenis Narkoba</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-sample" action="<?=base_url('admin/data/jenis_narkoba/create')?>" method="post" id="text-editor">
+          <div class="mb-3">
+            <label for="jenis_narkoba" class="col-form-label">Nama jenis narkoba:</label>
+            <input type="text" class="form-control" id="jenis_narkoba" name="jenis_narkoba">
+          </div>
+      </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" name="status" value="simpan" class="btn btn-success">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <script>
-      var chart;
-      d3.csv(
-        '<?php echo base_url('data/data.csv')?>'
-      ).then((dataFlattened) => {
-        chart = new d3.OrgChart()
-          .container('.chart-container')
-          .data(dataFlattened)
-          .rootMargin(100)
-          .nodeWidth((d) => 210)
-          .nodeHeight((d) => 140)
-          .childrenMargin((d) => 130)
-          .compactMarginBetween((d) => 75)
-          .compactMarginPair((d) => 80)
-          .linkUpdate(function (d, i, arr) {
-            d3.select(this)
-              .attr('stroke', (d) =>
-                d.data._upToTheRootHighlighted ? '#152785' : 'lightgray'
-              )
-              .attr('stroke-width', (d) =>
-                d.data._upToTheRootHighlighted ? 5 : 1.5
-              )
-              .attr('stroke-dasharray', '4,4');
-
-            if (d.data._upToTheRootHighlighted) {
-              d3.select(this).raise();
-            }
-          })
-          .nodeContent(function (d, i, arr, state) {
-            const colors = [
-              '#336B33',
-              '#18A8B6',
-              '#F45754',
-              '#96C62C',
-              '#BD7E16',
-              '#802F74',
-            ];
-            const color = colors[d.depth % colors.length];
-            const imageDim = 80;
-            const lightCircleDim = 95;
-            const outsideCircleDim = 110;
-
-            return `
-                <div style="background-color:#373948; border-color:#fff; position:absolute;width:${
-                  d.width
-                }px;height:${d.height}px; border-radius:10px;" >
-                   <div style="background-color:${color};position:absolute;margin-top:-${outsideCircleDim / 2}px;margin-left:${d.width / 2 - outsideCircleDim / 2}px;border-radius:100px;width:${outsideCircleDim}px;height:${outsideCircleDim}px;"></div>
-                   <div style="background-color:#191c24;position:absolute;margin-top:-${
-                     lightCircleDim / 2
-                   }px;margin-left:${d.width / 2 - lightCircleDim / 2}px;border-radius:100px;width:${lightCircleDim}px;height:${lightCircleDim}px;"></div>
-                   <img src=" ${
-                     d.data.imageUrl
-                   }" style="position:absolute;margin-top:-${imageDim / 2}px;margin-left:${d.width / 2 - imageDim / 2}px;border-radius:100px;width:${imageDim}px;height:${imageDim}px;" />
-                   <div class="card" style="top:${
-                     outsideCircleDim / 2 + 10
-                   }px;position:absolute;height:30px;width:${d.width}px;">
-                      <div style="background-color:${color};height:28px;text-align:center;color:#ffffff;font-weight:bold;font-size:16px">
-                          ${d.data.name} 
-                      </div>
-                      <div style="background-color:#F0EDEF;height:28px;text-align:center;color:#424142;font-size:16px">
-                          ${d.data.positionName} 
-                      </div>
-                   </div>
-               </div>
-  `;
-          })
-          .render();
-      });
+function confirmToDelete(el){
+    $("#delete-button").attr("href", el.dataset.href);
+    $("#confirm-dialog").modal('show');
+}
 </script>
+<script>
+      function myFunct(){
+        <?php echo 'swal("Good job!", "You clicked the button!", "success")';
+        ?>
+        
+      }
+    </script>
 
-  
 <?= $this->endSection() ?>

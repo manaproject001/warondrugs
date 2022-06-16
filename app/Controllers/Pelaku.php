@@ -21,8 +21,8 @@ class Pelaku extends BaseController
     public function index()
     {
         $pelaku = new PelakuViewModel();
-        $data['pelakus'] = $pelaku->findAll();
-
+        $data['pelakus'] = $pelaku->getWhere(['id_pelaku' => '1'])->getResultArray();
+        
         $detail = new DetailJenisNarkobaModel();
         $data['details'] = $detail->findAll();
         // isset($data['pelakus']) ? count($data['pelakus']) : 0;

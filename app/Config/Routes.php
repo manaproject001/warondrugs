@@ -43,7 +43,8 @@ $routes->group('admin',['filter' => 'auth'], function($routes){
 	$routes->add('kasus/(:segment)/edit', 'Admin::editKasus/$1');
 	$routes->get('kasus/(:segment)/delete', 'Admin::deleteKasus/$1');
 
-    $routes->get('jaringan_kasus/', 'Admin::jaringanKasus');
+    $routes->get('jaringan_kasus/(:segment)', 'Admin::jaringanKasus/$1');
+    $routes->get('jaringan_kasus', 'Admin::jaringanKasus');
 
     $routes->add('pelaku/tambah', 'Pelaku::createPelaku');
     $routes->add('pelaku', 'Pelaku::index');
