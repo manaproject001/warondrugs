@@ -36,17 +36,20 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('admin', 'Admin::index',['filter' => 'auth']);
 $routes->group('admin',['filter' => 'auth'], function($routes){
 	$routes->get('dashboard', 'Admin::index');
     $routes->add('kasus/tambah', 'Admin::createKasus');
-    $routes->add('kasus', 'Admin::kasus');
-	$routes->add('kasus/(:segment)/edit', 'Admin::editKasus/$1');
-	$routes->get('kasus/(:segment)/delete', 'Admin::deleteKasus/$1');
+    $routes->add('kasus', 'Kasus::kasus');
+    $routes->add('kasus/create', 'Kasus::createKasus');
+	$routes->add('kasus/(:segment)/edit', 'Kasus::editKasus/$1');
+	$routes->get('kasus/(:segment)/delete', 'Kasus::deleteKasus/$1');
 
-    $routes->get('jaringan_kasus/(:segment)', 'Admin::jaringanKasus/$1');
-    $routes->get('jaringan_kasus', 'Admin::jaringanKasus');
+    $routes->get('jaringan_kasus/(:segment)', 'Kasus::jaringanKasus/$1');
+    // $routes->get('jaringan_kasus', 'Kasus::jaringanKasus');
 
     $routes->add('pelaku/tambah', 'Pelaku::createPelaku');
+    $routes->add('pelaku/tambahProses', 'Pelaku::addPelaku');
     $routes->add('pelaku', 'Pelaku::index');
 	$routes->add('pelaku/(:segment)/edit', 'Pelaku::readPelakuEdit/$1');
     $routes->add('pelaku/(:segment)/editProses', 'Pelaku::updatePelaku/$1');
@@ -68,7 +71,8 @@ $routes->add('/login/auth', 'Login::auth');
 $routes->add('/logout', 'Login::logout');
 
 $routes->get('/baru', 'Admin::baru');
-
+$routes->get('/upload', 'Upload::index');
+$routes->add('/upload/proses', 'Upload::proses');
 
 /*
  * --------------------------------------------------------------------

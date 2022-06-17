@@ -1,7 +1,7 @@
 <?= $this->extend('layout/admin_layout') ?>
 <?= $this->section('content') ?>
 <div class="content-wrapper">
-    
+    <?=view('v_alert')?>
     <div class="row">
         <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
             <div class="card">

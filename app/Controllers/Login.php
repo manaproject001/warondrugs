@@ -29,13 +29,14 @@ class Login extends Controller
                     'logged_in'     => TRUE
                 ];
                 $session->set($ses_data);
-                return redirect()->to('/admin/dashboard');
+                session()->setFlashdata('success', 'Berhasil Login '.$email);
+                return redirect()->to('/admin');
             }else{
-                $session->setFlashdata('msg', 'Wrong Password');
+                session()->setFlashdata('error', 'Password Salah');
                 return redirect()->to('/login');
             }
         }else{
-            $session->setFlashdata('msg', 'Email not Found');
+            session()->setFlashdata('error', 'Email Tidak Ditemukan');
             return redirect()->to('/login');
         }
     }

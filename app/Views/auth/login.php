@@ -32,9 +32,7 @@
             <div class="card col-lg-4 mx-auto">
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-left mb-3">Login</h3>
-                <?php if(session()->getFlashdata('msg')):?>
-                    <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
-                <?php endif;?>
+                <?= view('v_alert');?>
                 <form action="/login/auth" method="post">
                     <div class="mb-3">
                         <label for="InputForEmail" class="form-label">Email address</label>

@@ -15,13 +15,14 @@
 <?php } ?>
 
 <?php
-    if(session()->getFlashData('gagal')){
+    if(session()->getFlashData('error')){
 ?>
 <script>
     swal({
-        type:"success",
-        text: <?=session()->getFlashData('gagal')?>,
-        title: "Error"
+        type:"error",
+        text: "<?=session()->getFlashData('error')?>",
+        title: "Gagal Login"
     })
+    // alert("Sukses")
 </script>
 <?php } ?>

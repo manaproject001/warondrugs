@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\PelakuModel;
 use App\Models\DetailJenisNarkobaModel;
 use App\Models\JenisNarkobaModel;
+use App\Models\KasusModel;
 use App\Models\PelakuViewModel;
 use Config\Services;
 
@@ -20,11 +21,14 @@ class Pelaku extends BaseController
 
     public function index()
     {
-        $pelaku = new PelakuViewModel();
-        $data['pelakus'] = $pelaku->getWhere(['id_pelaku' => '1'])->getResultArray();
         
+        // $data['pelakus'] = $pelaku->getWhere(['id_pelaku' => '1'])->getResultArray();
+        $pelaku = new PelakuViewModel();
+        $data['pelakus'] = $pelaku->findAll();
         $detail = new DetailJenisNarkobaModel();
         $data['details'] = $detail->findAll();
+        $kasus = new KasusModel();
+        $data['kasuss'] = $kasus->findAll();
         // isset($data['pelakus']) ? count($data['pelakus']) : 0;
 
         
@@ -34,11 +38,26 @@ class Pelaku extends BaseController
 
     public function createPelaku()
     {
-		// lakukan validasi
+        helper('form');
+		$jenis = new JenisNarkobaModel();
+        $data['jeniss'] = $jenis->findAll();
+        $kasus = new KasusModel();
+        $data['kasuss'] = $kasus->findAll();
+        $pelaku = new PelakuViewModel();
+        $data['kurir'] = $pelaku->query('Select * from v_pelaku where profil="Kurir"' )->getResultArray();
+        $data['bandar'] = $pelaku->query('Select * from v_pelaku where profil="Bandar" ' )->getResultArray();
+        echo view('form_pelaku', $data);
+    }
+    
+    public function addPelaku()
+    {
+        // lakukan validasi
         $validation =  \Config\Services::validation();
         $validation->setRules([
             'nama' => 'required',
-            'jenis_kelamin' => 'required'
+            'jenis_kelamin' => 'required',
+            'profil' => 'required',
+            'file_upload' => 'uploaded[file_upload]|mime_in[file_upload,image/jpg,image/jpeg,image/gif,image/png]|max_size[file_upload,4096]'
         ]);
         $isDataValid = $validation->withRequest($this->request)->run();
 
@@ -49,7 +68,18 @@ class Pelaku extends BaseController
         }
         // jika data valid, simpan ke database
         if($isDataValid){
+            
             $pelaku = new PelakuModel();
+            if($this->request->getPost('profil')=="Bandar"){
+                $idatasan="0";
+            }else{
+                $idatasan= $this->request->getPost('id_atasan');
+            }
+            $upload = $this->request->getFile('file_upload');
+            $upload->move(WRITEPATH . '../public/assets/images/');
+            
+            // $dataBerkas = $this->request->getFile('foto');
+            // $fileName = $dataBerkas->getName();
             $pelaku->insert([
                 "nama" => $this->request->getPost('nama'),
                 "tempat_lahir" => $this->request->getPost('tempat_lahir'),
@@ -62,45 +92,62 @@ class Pelaku extends BaseController
                 "uang_sita" => $this->request->getPost('uang_sita'),
                 "tkp" => $this->request->getPost('tkp'),
                 "kewarganegaraan" => $this->request->getPost('kewarganegaraan'),
-                "unit" => $this->request->getPost('unit')
+                "unit" => $this->request->getPost('unit'),
+                "id_kasus" => $this->request->getPost('id_kasus'),
+                "id_atasan" => $idatasan,
+                'foto' => $upload->getName()
+                // 'foto' => $fileName
             ]);
+            // $dataBerkas->move(WRITEPATH . '../public/assets/images/');
             $id_pelaku = $pelaku->getInsertID();
             $jenis_narkoba = count($this->request->getPost('jenis_narkoba'));
             for ($i = 0; $i < $jenis_narkoba; $i++) {
                 $datas[$i] = array(
                     'id_pelaku' => $id_pelaku,
-                    'id_jenis_narkoba' => $this->request->getPost('jenis_narkoba[' . $i . ']')
+                    'id_jenis_narkoba' => $this->request->getPost('jenis_narkoba[' . $i . ']'),
+                    'file_upload' => 'uploaded[file_upload]|mime_in[file_upload,image/jpg,image/jpeg,image/gif,image/png]|max_size[file_upload,4096]'
                 );
                 $jenis = new DetailJenisNarkobaModel();
                 $jenis->insert($datas[$i]);
             }
             $this->session->setFlashdata('success', 'Data Berhasil Ditambah');
             return redirect('admin/pelaku');
+        }else{
+            $this->session->setFlashdata('success', $validation->getError());
         }
-		$jenis = new JenisNarkobaModel();
-        $data['jeniss'] = $jenis->findAll();
-        // tampilkan form create
-        echo view('form_pelaku', $data);
     }
 
     public function readPelakuEdit($id)
     {
+        helper('form');
         $pelaku = new PelakuViewModel();
         $data['pelaku'] = $pelaku->where('id_pelaku', $id)->first();
+        $pelaku = new PelakuViewModel();
+        $data['pelakus'] = $pelaku->findAll();
         $jenis = new JenisNarkobaModel();
         $data['jeniss'] = $jenis->findAll();
+        $kasus = new KasusModel();
+        $data['kasuss'] = $kasus->findAll();
         echo view('form_pelaku_edit', $data);
     }
 
     
     function updatePelaku($id)
     {
+        helper('form');
          // Proses Update Pelaku
         $pelaku = new PelakuModel();
         $validation =  \Config\Services::validation();
         $validation->setRules(['nama' => 'required']);
         $isDataValid = $validation->withRequest($this->request)->run();
+        if($this->request->getPost('profil')=="Bandar"){
+            $idatasan="0";
+        }else{
+            $idatasan= $this->request->getPost('id_atasan');
+        }
         if($isDataValid){
+            $upload = $this->request->getFile('file_upload');
+            $upload->move(WRITEPATH . '../public/assets/images/');
             $pelaku->update($id, [
                 "nama" => $this->request->getPost('nama'),
                 "tempat_lahir" => $this->request->getPost('tempat_lahir'),
@@ -113,7 +160,10 @@ class Pelaku extends BaseController
                 "uang_sita" => $this->request->getPost('uang_sita'),
                 "tkp" => $this->request->getPost('tkp'),
                 "kewarganegaraan" => $this->request->getPost('kewarganegaraan'),
-                "unit" => $this->request->getPost('unit')
+                "unit" => $this->request->getPost('unit'),
+                "id_kasus" => $this->request->getPost('id_kasus'),
+                "id_atasan" => $idatasan,
+                'foto' => $upload->getName()
             ]);
             
             $jenis = new DetailJenisNarkobaModel();

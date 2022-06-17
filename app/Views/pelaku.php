@@ -1,21 +1,7 @@
 <?= $this->extend('layout/admin_layout') ?>
 <?= $this->section('content') ?>
 <div class="content-wrapper">
-<?php
-    if(session()->getFlashData('success')){
-    ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <?= session()->getFlashData('success') ?>
-        
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        
-      </button>
-    </div>
-    <?php echo '<script>swal("Good job!", "You clicked the button!", "success")</script>';
-        ?>
-    <?php
-    }
-    ?>
+    <?= view('v_alert');?>
     <div class="page-header">
         <h3 class="page-title" onclick="myFunct()"> Daftar Pelaku </h3>
         <!-- <button onclick="myFunct();">Try Sweet Alert</button> -->
@@ -39,10 +25,12 @@
                     <thead>
                         <tr>
                         <th>No</th>
+                        <th>Foto</th>
                         <th>Nama</th>
                         <th>Jenis Kelamin</th>
                         <th>Profil</th>
                         <th>Jenis Narkoba</th>
+                        <th>Kasus</th>
                         <th>Aksi</th>
                         </tr>
                     </thead>
@@ -50,16 +38,21 @@
                         <?php $no=1; foreach ($pelakus as $pelaku) : ?>
                             <tr>
                                 <td><?= $no; $no++ ?></td>
+                                <td><img src="<?=base_url('assets/images/'.$pelaku['foto']);?>" max-width="100"></td>
                                 <td><?= $pelaku['nama'] ?></td>
                                 <td><?= $pelaku['jenis_kelamin'] ?></td>
                                 <td><?= $pelaku['profil'] ?></td>
                                 <td><?= $pelaku['narkoba'] ?></td>
+                                <td><?= $pelaku['kasus'] ?></td>
                                 <td>
                                     <a href="<?= base_url('admin/pelaku/'.$pelaku['id_pelaku'].'/edit') ?>" type="button" class="btn btn-warning btn-sm btn-icon-text">
-                                        <i class="mdi mdi-pencil btn-icon-prepend"></i> Edit 
+                                        <i class="mdi mdi-pencil btn-icon-prepend"></i>  
                                     </a>
                                     <a type="button" class="btn btn-danger btn-sm btn-icon-text" data-href="<?= base_url('admin/pelaku/'.$pelaku['id_pelaku'].'/delete') ?>" onclick="confirmToDelete(this)">
-                                        <i class="mdi mdi-close btn-icon-prepend"></i> Hapus 
+                                        <i class="mdi mdi-close btn-icon-prepend"></i>  
+                                    </a>
+                                    <a type="button" class="btn btn-success btn-sm  btn-icon-text" href="<?= base_url('admin/jaringan_kasus/'.$pelaku['id_kasus']) ?>">
+                                        <i class="mdi mdi-magnify btn-icon-prepend"></i> 
                                     </a>
                                 </td>
                             </tr>

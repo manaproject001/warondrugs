@@ -36,8 +36,10 @@ class Data extends BaseController
             ]);
             $data['jenisnarkoba'] = $jenisNarkoba->findAll();
             session()->setFlashdata('success', 'Berkas Berhasil Ditambahkan');
-            return redirect('admin/data/jenis_narkoba');
+        }else{
+            session()->setFlashdata('error', 'Berkas Gagal Dihapus');
         }
+        return redirect('admin/data/jenis_narkoba');
     }
 
     function editJenisNarkoba($id)
@@ -52,15 +54,22 @@ class Data extends BaseController
                 "jenis_narkoba" => $this->request->getPost('jenis_narkoba')
             ]);
             session()->setFlashdata('success', 'Berkas Berhasil Diubah');
-            return redirect('admin/data/jenis_narkoba');
+        }else{
+            session()->setFlashdata('error', 'Berkas Gagal Dihapus');
         }
+        return redirect('admin/data/jenis_narkoba');
     }
 
     public function deleteJenisNarkoba($id){
         $jenisNarkoba = new JenisNarkobaModel();
-        $jenisNarkoba->delete($id);
+        $delete = $jenisNarkoba->delete($id);
         $data['jenisnarkoba'] = $jenisNarkoba->findAll();
-        session()->setFlashdata('success', 'Berkas Berhasil Dihapus');
+        if($delete){
+            session()->setFlashdata('success', 'Berkas Berhasil Dihapus');
+        }else{
+            session()->setFlashdata('error', 'Berkas Gagal Dihapus');
+        }
+        
         return redirect('admin/data/jenis_narkoba');
     }
 

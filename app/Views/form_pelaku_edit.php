@@ -15,7 +15,8 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Data Diri</h4>
-                    <form class="form-sample" action="<?= site_url('admin/pelaku/').$pelaku['id_pelaku'].'/editProses'?>" method="post" id="text-editor">
+                    <?= form_open_multipart(site_url('admin/pelaku/').$pelaku['id_pelaku'].'/editProses'); ?>
+                    
                         <p class="card-description"> Personal info </p>
                         <div class="row">
                             <div class="col-md-6">
@@ -148,11 +149,52 @@
                                 </div>
                             </div>
                         </div>
+                        <p class="card-description"> Informasi Keterlibatan </p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Kasus</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="id_kasus">
+                                            <option>-- Pilih --</option>
+                                            <?php foreach ($kasuss as $kasus) : ?>
+                                                <option value="<?=$kasus['id_kasus']?>"<?= $kasus['id_kasus'] == $pelaku['id_kasus'] ? 'selected':'' ?>><?=$kasus['kasus']?></option>
+                                            <?php endforeach ?>  
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Keterlibatan Dengan</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="id_atasan" <?= $pelaku['profil'] == 'Bandar' ? 'disabled':'' ?>>
+                                            <option><?= $pelaku['profil'] == 'Bandar' ? 'Bandar Tidak perlu diisi':'-- Pilih --' ?></option>
+                                            <?php foreach ($pelakus as $pel) : ?>
+                                                <option value="<?=$pel['id_pelaku']?>" <?= $pel['id_pelaku'] == $pelaku['id_atasan'] ? 'selected':'' ?>><?=$pel['nama']?></option>
+                                            <?php endforeach ?>  
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-md-center">
+                            <div class="card col-6 align-self-center" >
+                                <div class="card-header">
+                                    <h5 class="card-title text-center">Foto Pelaku</h5>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <input type="file" name="file_upload" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <center>
                             <button type="submit" name="edit" value="edit" class="btn btn-success btn-lg">Edit</button>
                         </center>
                         
-                    </form>
+                        <?= form_close() ?>
                 </div>
             </div>
         </div>

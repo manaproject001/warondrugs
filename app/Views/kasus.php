@@ -3,18 +3,17 @@
 <div class="content-wrapper">
 <?php echo view('v_alert');?>
     <div class="page-header">
-        <h3 class="page-title"> Jenis Narkoba </h3>
+        <h3 class="page-title"> Data Kasus </h3>
         <button type="button" class="nav-link btn btn-success create-new-button" data-bs-toggle="modal" data-bs-target="#exampleModal">Input Jenis Narkoba</button>
         
         <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Pelaku</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Daftar Pelaku</li>
+            <li class="breadcrumb-item"><a href="#">Kasus</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data Kasus</li>
         </ol>
         </nav>
     </div>
     <div class="row">
-        
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -38,13 +37,13 @@
                                 <td><?= $kasus['deskripsi'] ?></td>
                                 <td>
                                     <button data-bs-toggle="modal" data-bs-target="#edit<?=$kasus['id_kasus']?>" type="button" class="btn btn-warning btn-sm btn-icon-text">
-                                        <i class="mdi mdi-pencil btn-icon-prepend"></i> Edit 
+                                        <i class="mdi mdi-pencil btn-icon-prepend"></i>  
                                     </button>
-                                    <a type="button" class="btn btn-danger btn-sm btn-icon-text" data-href="<?= base_url('admin/data/jenis_narkoba/'.$kasus['id_kasus'].'/delete') ?>" onclick="confirmToDelete(this)">
-                                        <i class="mdi mdi-close btn-icon-prepend"></i> Hapus 
+                                    <a type="button" class="btn btn-danger btn-sm btn-icon-text" data-href="<?= base_url('admin/kasus/'.$kasus['id_kasus'].'/delete') ?>" onclick="confirmToDelete(this)">
+                                        <i class="mdi mdi-close btn-icon-prepend"></i>  
                                     </a>
-                                    <a type="button" class="btn btn-success btn-sm btn-icon-text" data-href="<?= base_url('admin/data/jaringan/'.$kasus['id_kasus']) ?>">
-                                        <i class="mdi mdi-magnify btn-icon-prepend"></i> Detail Jaringan 
+                                    <a type="button" class="btn btn-success btn-sm  btn-icon-text" href="<?= base_url('admin/jaringan_kasus/'.$kasus['id_kasus']) ?>">
+                                        <i class="mdi mdi-magnify btn-icon-prepend"></i> 
                                     </a>
                                     <div class="modal fade" id="edit<?=$kasus['id_kasus']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -54,7 +53,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-sample" action="<?=base_url('admin/data/kasus/'.$kasus['id_kasus'].'/edit')?>" method="post" id="text-editor">
+                                                <form class="form-sample" action="<?=base_url('admin/kasus/'.$kasus['id_kasus'].'/edit')?>" method="post" id="text-editor">
                                                 <div class="mb-3">
                                                     <label for="kasus" class="col-form-label">Kasus :</label>
                                                     <input type="text" class="form-control" id="kasus" name="kasus" value="<?=$kasus['kasus']?>">
@@ -62,6 +61,14 @@
                                                 <div class="mb-3">
                                                     <label for="deskripsi" class="col-form-label">Deskripsi :</label>
                                                     <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="<?=$kasus['deskripsi']?>">
+                                                </div>
+                                                <div class="mb-3">
+                                                  <label for="tanggal_dibuka" class="col-form-label">Tanggal Dibuka:</label>
+                                                  <input type="date" class="form-control" id="tanggal_dibuka" name="tanggal_dibuka" value="<?=$kasus['tanggal_dibuka']?>">
+                                                </div>
+                                                <div class="mb-3">
+                                                  <label for="tanggal_dibuka" class="col-form-label">Tanggal Ditutup:</label>
+                                                  <input type="date" class="form-control" id="tanggal_ditutup" name="tanggal_ditutup" value="<?=$kasus['tanggal_ditutup']?>">
                                                 </div>
                                             </div>
                                                 <div class="modal-footer">
@@ -102,14 +109,26 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Input Data jenis Narkoba</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Input Data Kasus</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="form-sample" action="<?=base_url('admin/data/jenis_narkoba/create')?>" method="post" id="text-editor">
+        <form class="form-sample" action="<?=base_url('admin/kasus/create')?>" method="post" id="text-editor">
           <div class="mb-3">
-            <label for="jenis_narkoba" class="col-form-label">Nama jenis narkoba:</label>
-            <input type="text" class="form-control" id="jenis_narkoba" name="jenis_narkoba">
+            <label for="kasus" class="col-form-label">Nama Kasus:</label>
+            <input type="text" class="form-control" id="kasus" name="kasus">
+          </div>
+          <div class="mb-3">
+            <label for="deskripsi" class="col-form-label">Deskripsi:</label>
+            <input type="text" class="form-control" id="deskripsi" name="deskripsi">
+          </div>
+          <div class="mb-3">
+            <label for="tanggal_dibuka" class="col-form-label">Tanggal Dibuka:</label>
+            <input type="date" class="form-control" id="tanggal_dibuka" name="tanggal_dibuka">
+          </div>
+          <div class="mb-3">
+            <label for="tanggal_dibuka" class="col-form-label">Tanggal Ditutup:</label>
+            <input type="date" class="form-control" id="tanggal_ditutup" name="tanggal_ditutup">
           </div>
       </div>
         <div class="modal-footer">

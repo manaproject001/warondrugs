@@ -20,10 +20,12 @@
     <link rel="stylesheet" href="<?=base_url('assets/vendors/select2/select2.min.css')?>">
     <link rel="stylesheet" href="<?=base_url('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')?>">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/filepond/4.30.4/filepond.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/filepond.css')?>">
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css')?>">
     <!-- End layout styles -->
@@ -98,6 +100,9 @@
     <script src="<?=base_url('assets/js/select2.js')?>"></script>
     <script src="<?=base_url('assets/js/main.js')?>"></script>
     <!-- End Form -->
+
+    <!-- upload image -->
+    <script src="<?=base_url('assets/js/filepond.js')?>"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
     
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
@@ -110,6 +115,7 @@
     <script src="https://cdn.jsdelivr.net/npm/d3-org-chart@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3-flextree@2.1.2/build/d3-flextree.js"></script>
     <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/filepond/4.30.4/filepond.min.js"></script>
     <script>
       $(document).ready(function () {
           $('#example').DataTable();
