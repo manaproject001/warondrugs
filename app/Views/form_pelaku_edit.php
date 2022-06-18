@@ -14,6 +14,11 @@
         <div class="col-12 grid-margin">
             <div class="card">
                 <div class="card-body">
+                    <div class="text-center">
+                        <a data-fancybox data-src="<?=base_url('assets/images/foto/'.$pelaku['foto']);?>" data-caption="<?= $pelaku['nama'] ?>">
+                            <img src="<?=base_url('assets/images/foto/'.$pelaku['foto']);?>" width="100" />
+                        </a>
+                    </div>
                     <h4 class="card-title">Data Diri</h4>
                     <?= form_open_multipart(site_url('admin/pelaku/').$pelaku['id_pelaku'].'/editProses'); ?>
                     

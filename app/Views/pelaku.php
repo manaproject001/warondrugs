@@ -38,7 +38,10 @@
                         <?php $no=1; foreach ($pelakus as $pelaku) : ?>
                             <tr>
                                 <td><?= $no; $no++ ?></td>
-                                <td><img src="<?=base_url('assets/images/'.$pelaku['foto']);?>" max-width="100"></td>
+                                <td>
+                                <a data-fancybox data-src="<?=base_url('assets/images/foto/'.$pelaku['foto']);?>" data-caption="<?= $pelaku['nama'] ?>">
+                                    <img src="<?=base_url('assets/images/foto/'.$pelaku['foto']);?>" width="150" />
+                                </a>
                                 <td><?= $pelaku['nama'] ?></td>
                                 <td><?= $pelaku['jenis_kelamin'] ?></td>
                                 <td><?= $pelaku['profil'] ?></td>
@@ -51,9 +54,13 @@
                                     <a type="button" class="btn btn-danger btn-sm btn-icon-text" data-href="<?= base_url('admin/pelaku/'.$pelaku['id_pelaku'].'/delete') ?>" onclick="confirmToDelete(this)">
                                         <i class="mdi mdi-close btn-icon-prepend"></i>  
                                     </a>
-                                    <a type="button" class="btn btn-success btn-sm  btn-icon-text" href="<?= base_url('admin/jaringan_kasus/'.$pelaku['id_kasus']) ?>">
-                                        <i class="mdi mdi-magnify btn-icon-prepend"></i> 
-                                    </a>
+                                    <?php if($pelaku['kasus']!=""){?>
+                                        <a type="button" class="btn btn-success btn-sm  btn-icon-text" href="<?= base_url('admin/jaringan_kasus/'.$pelaku['id_kasus']) ?>">
+                                            <i class="mdi mdi-magnify btn-icon-prepend"></i> 
+                                        </a>
+                                        <?php
+                                    }?>
+                                    
                                 </td>
                             </tr>
                         <?php endforeach ?>

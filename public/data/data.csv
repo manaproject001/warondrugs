@@ -1,10 +1,12 @@
 name,imageUrl,positionName,id,parentId,narkoba,berat
-Yaya,face1.jpg,Pengguna,9,15,Heroin,"1200 gra"
-"Ahriman AS",face14.jpg,Pengguna,10,23,"Heroin,Ganja","1200 gra"
-Firkas,face7.jpg,Bandar,13,,Heroin,"1200000 gram"
-Areui,face10.jpg,Kurir,15,13,Heroin,"1200 gram"
-niki,face8.jpg,Pengguna,16,15,Heroin,"1200 gram"
-Aren,face11_2.jpg,Pengguna,17,15,Heroin,"1200 gram"
-sadian,face27.jpg,Pengguna,18,19,Heroin,575
-Philip,face4_2.jpg,Kurir,19,13,Heroin,"1200 gram"
-Kasmanto,man_2.jpg,Kurir,23,13,Heroin,"1200 gram"
+Yaya,Yaya.jpg,Pengguna,9,15,Heroin,"1200 gra"
+"Ahriman AS","Ahriman AS.jpg",Pengguna,10,23,"Ganja,Heroin","1200 gra"
+Firkas,Firkas.jpg,Bandar,13,,Heroin,"1200000 gram"
+Areui,Areui.jpg,Kurir,15,13,Heroin,"1200 gram"
+niki,niki.jpg,Pengguna,16,15,Heroin,"1200 gram"
+Brody,Brody.jpg,Pengguna,17,23,Heroin,"1200 gram"
+sadeo,sadeo.jpg,Pengguna,18,19,Heroin,575
+Philip,Philip.jpg,Kurir,19,13,Heroin,"1200 gram"
+Marcel,Kasmanto.jpg,Kurir,23,13,Heroin,"1200 gram"
+desi,desi.jpg,Pengguna,32,15,Heroin,"1000 gram"
+sasa,Wanita.jpg,Pengguna,34,15,Sabu-sabu,"1000 gram"

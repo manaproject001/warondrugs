@@ -147,7 +147,7 @@
                                     <label class="col-sm-3 col-form-label">Kasus</label>
                                     <div class="col-sm-9">
                                         <select class="form-control" name="id_kasus" id="id_kasus" disabled>
-                                            <option>-- Pilih --</option>
+                                            <option value="0">-- Pilih --</option>
                                             <?php foreach ($kasuss as $kasus) : ?>
                                                 <option value="<?=$kasus['id_kasus']?>"><?=$kasus['kasus']?></option>
                                             <?php endforeach ?>  
@@ -160,7 +160,7 @@
                                     <label class="col-sm-3 col-form-label">Keterlibatan Kurir</label>
                                     <div class="col-sm-9">
                                         <select class="form-control id_atasan" name="id_atasan" id="id_atasan" >
-                                            <option>-- Pilih --</option>
+                                            <option value="0">-- Pilih --</option>
                                             </script>
                                         </select>
                                     </div>

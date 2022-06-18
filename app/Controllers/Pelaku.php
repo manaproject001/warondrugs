@@ -77,11 +77,16 @@ class Pelaku extends BaseController
             }
             $upload = $this->request->getFile('file_upload');
             if($upload->getName()==""){
-                $foto="Kosong";
+                if($this->request->getPost('jenis_kelamin')=='Pria'){
+                    $foto="Pria.jpg";
+                }else{
+                    $foto="Wanita.jpg";
+                }
             }else{
-                
-                $upload->move(WRITEPATH . '../public/assets/images/');
-                $foto = $upload->getName();
+                $nama=$this->request->getPost('nama').".jpg";
+                $path = WRITEPATH . '../public/assets/images/foto/';
+                $upload->move($path,$nama);
+                $foto = $nama;
             }
             
             
@@ -171,8 +176,13 @@ class Pelaku extends BaseController
             if($upload->getName()==""){
                 $foto=$this->request->getPost('file_upload_old');
             }else{
-                $upload->move(WRITEPATH . '../public/assets/images/');
-                $foto = $upload->getName();
+                // if($upload != 'Pria.jpg' || $upload != 'Wanita.jpg'){
+                //     unlink("../public/assets/images/foto/".$upload);
+                // }
+                $nama=$this->request->getPost('nama').".jpg";
+                $path = WRITEPATH . '../public/assets/images/foto/';
+                $upload->move($path,$nama);
+                $foto = $nama;
             }
             $pelaku->update($id, [
                 "nama" => $this->request->getPost('nama'),

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="<?=base_url('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')?>">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/filepond/4.30.4/filepond.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -70,7 +70,7 @@
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="<?= base_url('assets/vendors/chart.js/Chart.min.js')?>"></script>
-   
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
     <script src="<?= base_url('assets/vendors/jvectormap/jquery-jvectormap.min.js')?>"></script>
     <script src="<?= base_url('assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js')?>"></script>
     <script src="<?= base_url('assets/vendors/owl-carousel-2/owl.carousel.min.js')?>"></script>
