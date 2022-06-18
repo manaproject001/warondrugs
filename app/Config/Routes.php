@@ -39,15 +39,18 @@ $routes->get('/', 'Home::index');
 $routes->get('admin', 'Admin::index',['filter' => 'auth']);
 $routes->group('admin',['filter' => 'auth'], function($routes){
 	$routes->get('dashboard', 'Admin::index');
+    //kasus
     $routes->add('kasus/tambah', 'Admin::createKasus');
     $routes->add('kasus', 'Kasus::kasus');
     $routes->add('kasus/create', 'Kasus::createKasus');
 	$routes->add('kasus/(:segment)/edit', 'Kasus::editKasus/$1');
 	$routes->get('kasus/(:segment)/delete', 'Kasus::deleteKasus/$1');
-
+    //jaringan kasus
     $routes->get('jaringan_kasus/(:segment)', 'Kasus::jaringanKasus/$1');
-    // $routes->get('jaringan_kasus', 'Kasus::jaringanKasus');
-
+    //user
+    $routes->add('user/(:segment)', 'User::readUser/$1');
+    $routes->add('user/(:segment)/editProses', 'User::editUser/$1');
+    //Pelaku
     $routes->add('pelaku/tambah', 'Pelaku::createPelaku');
     $routes->add('pelaku/tambahProses', 'Pelaku::addPelaku');
     $routes->add('pelaku', 'Pelaku::index');
@@ -71,11 +74,12 @@ $routes->get('/login', 'Login::index');
 $routes->add('/login/auth', 'Login::auth');
 $routes->add('/logout', 'Login::logout');
 
-$routes->get('/baru', 'Admin::baru');
 $routes->get('/upload', 'Upload::index');
 $routes->add('/upload/proses', 'Upload::proses');
 $routes->get('/kategori', 'Kategori::index');
 $routes->add('/kategori/get_kasus', 'Kategori::get_kasus');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

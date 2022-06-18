@@ -3,12 +3,12 @@
     <div class="profile-desc">
         <div class="profile-pic">
             <div class="count-indicator">
-                <img class="img-xs rounded-circle " src="<?=base_url('assets/images/faces/face15.jpg')?>" alt="">
+                <img class="img-xs rounded-circle " src="<?=base_url('assets/images/admin')?>/<?=session()->get('foto')?>" alt="">
                 <span class="count bg-success"></span>
             </div>
             <div class="profile-name">
                 <h5 class="mb-0 font-weight-normal"><?=session()->get('user_name')?></h5>
-                <span>Admin</span>
+                <span><?=session()->get('title')?></span>
             </div>
         </div>
     </div>
