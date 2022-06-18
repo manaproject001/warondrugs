@@ -7,8 +7,8 @@
                 <span class="count bg-success"></span>
             </div>
             <div class="profile-name">
-                <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-                <span>Penyidik</span>
+                <h5 class="mb-0 font-weight-normal"><?=session()->get('user_name')?></h5>
+                <span>Admin</span>
             </div>
         </div>
     </div>

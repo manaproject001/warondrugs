@@ -174,7 +174,7 @@
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                         File uploader with image preview 
+                                         Upload Foto
                                         <input type="file" name="file_upload" class="form-control">
                                     </div>
                                 </div>
@@ -198,8 +198,8 @@
 <script>
     function show(){
         document.getElementById("id_kasus").disabled = false;
-        document.getElementById("id_kasus").value = "-- Pilih --";
-        document.getElementById("id_atasan").value = "-- Pilih --";
+        document.getElementById("id_kasus").value = "0";
+        document.getElementById("id_atasan").value = "0";
     }
 </script>
 <script type="text/javascript">
