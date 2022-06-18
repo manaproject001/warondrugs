@@ -82,11 +82,11 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Sebagai</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="profil">
+                                        <select class="form-control" name="profil" id="profil" onchange="show()" required>
                                             <option>-- Pilih --</option>
-                                            <option <?= $pelaku['profil'] == 'Pengguna' ? 'selected':'' ?>>Pengguna</option>
-                                            <option <?= $pelaku['profil'] == 'Kurir' ? 'selected':'' ?>>Kurir</option>
-                                            <option <?= $pelaku['profil'] == 'Bandar' ? 'selected':'' ?>>Bandar</option>
+                                            <option value="Pengguna" <?= $pelaku['profil'] == 'Pengguna' ? 'selected':'' ?>>Pengguna</option>
+                                            <option value="Kurir" <?= $pelaku['profil'] == 'Kurir' ? 'selected':'' ?>>Kurir</option>
+                                            <option value="Bandar" <?= $pelaku['profil'] == 'Bandar' ? 'selected':'' ?>>Bandar</option>
                                         </select>
                                     </div>
                                 </div>
@@ -155,7 +155,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Kasus</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="id_kasus">
+                                        <select class="form-control" name="id_kasus" id="id_kasus">
                                             <option>-- Pilih --</option>
                                             <?php foreach ($kasuss as $kasus) : ?>
                                                 <option value="<?=$kasus['id_kasus']?>"<?= $kasus['id_kasus'] == $pelaku['id_kasus'] ? 'selected':'' ?>><?=$kasus['kasus']?></option>
@@ -168,11 +168,11 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Keterlibatan Dengan</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="id_atasan" <?= $pelaku['profil'] == 'Bandar' ? 'disabled':'' ?>>
-                                            <option><?= $pelaku['profil'] == 'Bandar' ? 'Bandar Tidak perlu diisi':'-- Pilih --' ?></option>
+                                        <select class="form-control id_atasan" name="id_atasan" id="id_atasan" <?= $pelaku['profil'] == 'Bandar' ? 'disabled':'' ?> >
+                                        <option>-- Pilih --</option>
                                             <?php foreach ($pelakus as $pel) : ?>
-                                                <option value="<?=$pel['id_pelaku']?>" <?= $pel['id_pelaku'] == $pelaku['id_atasan'] ? 'selected':'' ?>><?=$pel['nama']?></option>
-                                            <?php endforeach ?>  
+                                                <option value="<?=$pel['id_pelaku']?>"<?= $pel['id_pelaku'] == $pelaku['id_atasan'] ? 'selected':'' ?>><?=$pel['nama']?> {<?=$pel['profil']?>} <?=$pel['kasus']?></option>
+                                            <?php endforeach ?> 
                                         </select>
                                     </div>
                                 </div>
@@ -186,6 +186,7 @@
                                 <div class="card-content">
                                     <div class="card-body">
                                         <input type="file" name="file_upload" class="form-control">
+                                        <input type="text" class="form-control"  name="file_upload_old" value="<?= $pelaku['foto'] ?>" hidden/>
                                     </div>
                                 </div>
                             </div>
@@ -200,4 +201,66 @@
         </div>
     </div>
 </div>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+<script>
+    function show(){
+        document.getElementById("id_kasus").disabled = false;
+        document.getElementById("id_kasus").value = "-- Pilih --";
+        document.getElementById("id_atasan").value = "-- Pilih --";
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#id_kasus').click(function(){
+            var id=$(this).val();
+            var profil=$('#profil option:selected').val();
+            console.log(profil);
+            $.ajax({
+                url : "<?php echo base_url();?>/index.php/kategori/get_kasus",
+                method : "POST",
+                data : {id: id, profil: profil},
+                async : false,
+                dataType : 'json',
+                success: function(data){
+                    var html = '';
+                    var i;
+                    for(i=0; i<data.length; i++){
+                        html += '<option value='+data[i].id_pelaku+'>'+data[i].nama+' {'+data[i].profil+'} '+data[i].kasus+'</option>';
+                    }
+                    $('.id_atasan').html(html);
+                     
+                }
+            });
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#id_kasus').click(function(){
+            var id=$(this).val();
+            var profil=$('#profil option:selected').val();
+            console.log(profil);
+            $.ajax({
+                url : "<?php echo base_url();?>/index.php/kategori/get_kasus",
+                method : "POST",
+                data : {id: id, profil: profil},
+                async : false,
+                dataType : 'json',
+                success: function(data){
+                    var html = '';
+                    var i;
+                    for(i=0; i<data.length; i++){
+                        html += '<option value='+data[i].id_pelaku+'>'+data[i].nama+' {'+data[i].profil+'} '+data[i].kasus+'</option>';
+                    }
+                    $('.id_atasan').html(html);
+                     
+                }
+            });
+        });
+    });
+</script>
+<!-- -->
 <?= $this->endSection() ?>

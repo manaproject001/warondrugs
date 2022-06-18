@@ -82,38 +82,15 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Sebagai</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="profil" onchange="check()" id="profil" required>
+                                        <select class="form-control" name="profil" id="profil" onchange="show()" required>
                                             <option>-- Pilih --</option>
-                                            <option>Pengguna</option>
-                                            <option>Kurir</option>
-                                            <option>Bandar</option>
+                                            <option value="Pengguna">Pengguna</option>
+                                            <option value="Kurir">Kurir</option>
+                                            <option value="Bandar">Bandar</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                            <script>
-                                function check() {
-                                    var val = document.getElementById('profil').value;
-                                    if(val=='Pengguna') {
-                                        // document.getElementById("bandar").hidden = false;
-                                        document.getElementById("bandar").hidden = false;
-                                        document.getElementById("bandar2").hidden = true;
-                                        document.getElementById("bandar3").hidden = true;
-                                        // document.getElementById("atasan").innerHTML = "Keterlibatan Kurir";
-                                    }else if(val=='Bandar'){
-                                        document.getElementById("bandar").hidden = true;
-                                        document.getElementById("bandar2").hidden = true;
-                                        document.getElementById("bandar3").hidden = false;
-                                        // document.getElementById("bandar").hidden = true;
-                                    }else {
-                                        // document.getElementById("bandar").hidden = false;
-                                        document.getElementById("bandar").hidden = true;
-                                        document.getElementById("bandar2").hidden = false;
-                                        document.getElementById("bandar3").hidden = true;
-                                        // document.getElementById('atasan').innerHTML = "Keterlibatan Bandar";
-                                    }
-                                }
-                            </script>
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Jenis Narkoba</label>
@@ -169,7 +146,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Kasus</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="id_kasus">
+                                        <select class="form-control" name="id_kasus" id="id_kasus" disabled>
                                             <option>-- Pilih --</option>
                                             <?php foreach ($kasuss as $kasus) : ?>
                                                 <option value="<?=$kasus['id_kasus']?>"><?=$kasus['kasus']?></option>
@@ -178,52 +155,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6" id="bandar">
+                            <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" id="atasan">Keterlibatan Kurir</label>
+                                    <label class="col-sm-3 col-form-label">Keterlibatan Kurir</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="id_atasan" id="id_atasan" >
-                                            <option id="kosongan">-- Pilih --</option>
-                                                <?php foreach ($kurir as $pelaku) : ?>
-                                                    <option value="<?=$pelaku['id_pelaku']?>"><?=$pelaku['nama']?> {<?=$pelaku['profil']?>} - <?=$pelaku['kasus']?></option>
-                                                <?php endforeach ?> 
-                                            </script>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6" id="bandar2" hidden>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" id="atasan">Keterlibatan Bandar</label>
-                                    <div class="col-sm-9">
-                                        <select class="form-control" name="id_atasan" id="id_atasan" >
-                                            <option id="kosongan">-- Pilih --</option>
-                                                <?php foreach ($bandar as $pelaku) : ?>
-                                                    <option value="<?=$pelaku['id_pelaku']?>"><?=$pelaku['nama']?> {<?=$pelaku['profil']?>} - <?=$pelaku['kasus']?></option>
-                                                <?php endforeach ?> 
-                                            </script>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6" id="bandar3" hidden>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" id="atasan">Keterlibatan Bandar</label>
-                                    <div class="col-sm-9">
-                                        <select class="form-control" name="id_atasan" id="id_atasan" disabled>
-                                            <option id="kosongan">Bandar Tidak Perlu Diisi</option> 
+                                        <select class="form-control id_atasan" name="id_atasan" id="id_atasan" >
+                                            <option>-- Pilih --</option>
                                             </script>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-md-4">
-                            <label>File</label>
-                            <div class="form-group">
-                                <input type="file" name="file_upload" class="form-control"> 
-                            </div>	    			
-                        </div> -->
                         <div class="row justify-content-md-center">
                             <div class="card col-6 align-self-center" >
                                 <div class="card-header">
@@ -248,4 +191,40 @@
         </div>
     </div>
 </div>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+<script>
+    function show(){
+        document.getElementById("id_kasus").disabled = false;
+        document.getElementById("id_kasus").value = "-- Pilih --";
+        document.getElementById("id_atasan").value = "-- Pilih --";
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#id_kasus').click(function(){
+            var id=$(this).val();
+            var profil=$('#profil option:selected').val();
+            console.log(profil);
+            $.ajax({
+                url : "<?php echo base_url();?>/index.php/kategori/get_kasus",
+                method : "POST",
+                data : {id: id, profil: profil},
+                async : false,
+                dataType : 'json',
+                success: function(data){
+                    var html = '<option>-- Pilih --</option>';
+                    var i;
+                    for(i=0; i<data.length; i++){
+                        html += '<option value='+data[i].id_pelaku+'>'+data[i].nama+' {'+data[i].profil+'} '+data[i].kasus+'</option>';
+                    }
+                    $('.id_atasan').html(html);
+                     
+                }
+            });
+        });
+    });
+</script>
 <?= $this->endSection() ?>

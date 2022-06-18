@@ -26,6 +26,6 @@ class PelakuModel extends Model
         'id_kasus',
         'foto'
 ];
-
+    
     
 }

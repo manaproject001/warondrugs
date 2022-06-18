@@ -12,5 +12,19 @@ class KasusModel extends Model
     protected $useAutoIncrement = true;
     protected $allowedFields = ['kasus', 'deskripsi', 'tanggal_dibuka'];
 
+    public function getAllKasus()
+    {
+        $this->findAll();
+    }
+
+    function get_kategori(){
+        $hasil=$this->db->query("SELECT * FROM kategori");
+        return $hasil->getResultArray();
+    }
+ 
+    function get_subkategori($id){
+        $hasil= $this->db->query("SELECT * FROM subkategori WHERE subkategori_kategori_id='$id'");
+        return $hasil->getResult();
+    }
     
 }

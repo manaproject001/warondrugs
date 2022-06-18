@@ -1,9 +1,10 @@
 name,imageUrl,positionName,id,parentId,narkoba,berat
-"Ahriman REto",man_1.jpg,Kurir,1,3,"Heroin,Ganja,Sabu-sabu","1 kg"
-Arey,face2.jpg,Bandar,3,,"Ganja,Ekstasi,Heroin","10000 gram"
-Kisiman,,Pengguna,4,1,Ekstasi,"1200 gram"
-Ray,face5.jpg,Kurir,6,3,Sabu-sabu,"120000 gram"
-Waro,,Pengguna,7,6,"Sabu-sabu,Ganja","1200 gra"
-"Ahriman AS",,Pengguna,10,1,"Heroin,Ganja","1200 gra"
-angngn,,Pengguna,11,6,"Ekstasi,Ganja","1200 gra"
-Hamaru,face4.jpg,Kurir,30,3,Ganja,"1200 gram"
+Yaya,face1.jpg,Pengguna,9,15,Heroin,"1200 gra"
+"Ahriman AS",face14.jpg,Pengguna,10,23,"Heroin,Ganja","1200 gra"
+Firkas,face7.jpg,Bandar,13,,Heroin,"1200000 gram"
+Areui,face10.jpg,Kurir,15,13,Heroin,"1200 gram"
+niki,face8.jpg,Pengguna,16,15,Heroin,"1200 gram"
+Aren,face11_2.jpg,Pengguna,17,15,Heroin,"1200 gram"
+sadian,face27.jpg,Pengguna,18,19,Heroin,575
+Philip,face4_2.jpg,Kurir,19,13,Heroin,"1200 gram"
+Kasmanto,man_2.jpg,Kurir,23,13,Heroin,"1200 gram"

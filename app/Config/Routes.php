@@ -54,6 +54,7 @@ $routes->group('admin',['filter' => 'auth'], function($routes){
 	$routes->add('pelaku/(:segment)/edit', 'Pelaku::readPelakuEdit/$1');
     $routes->add('pelaku/(:segment)/editProses', 'Pelaku::updatePelaku/$1');
 	$routes->get('pelaku/(:segment)/delete', 'Pelaku::deletePelaku/$1');
+    $routes->add('pelaku/get_atasan', 'Pelaku::get_atasan');
 });
 
 $routes->group('admin/data',['filter' => 'auth'], function($routes){
@@ -73,7 +74,8 @@ $routes->add('/logout', 'Login::logout');
 $routes->get('/baru', 'Admin::baru');
 $routes->get('/upload', 'Upload::index');
 $routes->add('/upload/proses', 'Upload::proses');
-
+$routes->get('/kategori', 'Kategori::index');
+$routes->add('/kategori/get_kasus', 'Kategori::get_kasus');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

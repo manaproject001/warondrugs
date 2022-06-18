@@ -57,7 +57,7 @@ class Pelaku extends BaseController
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'profil' => 'required',
-            'file_upload' => 'uploaded[file_upload]|mime_in[file_upload,image/jpg,image/jpeg,image/gif,image/png]|max_size[file_upload,4096]'
+            // 'file_upload' => 'uploaded[file_upload]|mime_in[file_upload,image/jpg,image/jpeg,image/gif,image/png]|max_size[file_upload,4096]'
         ]);
         $isDataValid = $validation->withRequest($this->request)->run();
 
@@ -76,7 +76,14 @@ class Pelaku extends BaseController
                 $idatasan= $this->request->getPost('id_atasan');
             }
             $upload = $this->request->getFile('file_upload');
-            $upload->move(WRITEPATH . '../public/assets/images/');
+            if($upload->getName()==""){
+                $foto="Kosong";
+            }else{
+                
+                $upload->move(WRITEPATH . '../public/assets/images/');
+                $foto = $upload->getName();
+            }
+            
             
             // $dataBerkas = $this->request->getFile('foto');
             // $fileName = $dataBerkas->getName();
@@ -95,7 +102,7 @@ class Pelaku extends BaseController
                 "unit" => $this->request->getPost('unit'),
                 "id_kasus" => $this->request->getPost('id_kasus'),
                 "id_atasan" => $idatasan,
-                'foto' => $upload->getName()
+                'foto' => $foto,
                 // 'foto' => $fileName
             ]);
             // $dataBerkas->move(WRITEPATH . '../public/assets/images/');
@@ -105,16 +112,23 @@ class Pelaku extends BaseController
                 $datas[$i] = array(
                     'id_pelaku' => $id_pelaku,
                     'id_jenis_narkoba' => $this->request->getPost('jenis_narkoba[' . $i . ']'),
-                    'file_upload' => 'uploaded[file_upload]|mime_in[file_upload,image/jpg,image/jpeg,image/gif,image/png]|max_size[file_upload,4096]'
                 );
                 $jenis = new DetailJenisNarkobaModel();
                 $jenis->insert($datas[$i]);
             }
             $this->session->setFlashdata('success', 'Data Berhasil Ditambah');
-            return redirect('admin/pelaku');
+            
         }else{
-            $this->session->setFlashdata('success', $validation->getError());
+            $this->session->setFlashdata('error', $validation->getError());
         }
+        return redirect('admin/pelaku');
+    }
+
+    public function get_atasan(){
+        $id = $this->request->getPost('id');
+        $atasan = new PelakuViewModel();
+        $data=$atasan->get_atasan($id);
+        echo json_encode($data);
     }
 
     public function readPelakuEdit($id)
@@ -122,8 +136,15 @@ class Pelaku extends BaseController
         helper('form');
         $pelaku = new PelakuViewModel();
         $data['pelaku'] = $pelaku->where('id_pelaku', $id)->first();
-        $pelaku = new PelakuViewModel();
-        $data['pelakus'] = $pelaku->findAll();
+        
+        $id_kasus = $data['pelaku']['id_kasus'];
+        $profil = $data['pelaku']['profil'];
+        if($profil=="Pengguna"){
+            $p="Kurir";
+        }else{
+            $p="Bandar";
+        }
+        $data['pelakus'] = $pelaku->query("SELECT * FROM v_pelaku WHERE id_kasus='$id_kasus' AND profil='$p'")->getResultArray();
         $jenis = new JenisNarkobaModel();
         $data['jeniss'] = $jenis->findAll();
         $kasus = new KasusModel();
@@ -147,7 +168,12 @@ class Pelaku extends BaseController
         }
         if($isDataValid){
             $upload = $this->request->getFile('file_upload');
-            $upload->move(WRITEPATH . '../public/assets/images/');
+            if($upload->getName()==""){
+                $foto=$this->request->getPost('file_upload_old');
+            }else{
+                $upload->move(WRITEPATH . '../public/assets/images/');
+                $foto = $upload->getName();
+            }
             $pelaku->update($id, [
                 "nama" => $this->request->getPost('nama'),
                 "tempat_lahir" => $this->request->getPost('tempat_lahir'),
@@ -163,7 +189,7 @@ class Pelaku extends BaseController
                 "unit" => $this->request->getPost('unit'),
                 "id_kasus" => $this->request->getPost('id_kasus'),
                 "id_atasan" => $idatasan,
-                'foto' => $upload->getName()
+                'foto' => $foto
             ]);
             
             $jenis = new DetailJenisNarkobaModel();
