@@ -65,6 +65,11 @@ $routes->group('admin/data',['filter' => 'auth'], function($routes){
     $routes->add('jenis_narkoba/create', 'Data::createJenisNarkoba');
     $routes->get('jenis_narkoba/(:segment)/delete', 'Data::deleteJenisNarkoba/$1');
     $routes->add('jenis_narkoba/(:segment)/edit', 'Data::editJenisNarkoba/$1');
+
+    $routes->add('penanganan', 'Data::penanganan');
+    $routes->add('penanganan/create', 'Data::createPenanganan');
+    $routes->get('penanganan/(:segment)/delete', 'Data::deletePenanganan/$1');
+    $routes->add('penanganan/(:segment)/edit', 'Data::editPenanganan/$1');
 });
 
 //Auth

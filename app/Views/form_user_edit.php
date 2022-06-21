@@ -58,6 +58,11 @@
                                         <input type="file" name="file_upload" class="form-control">
                                     </div>
                                 </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <input type="text" name="file_upload_old" class="form-control" value="<?= $user['foto'] ?>" hidden>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <center>

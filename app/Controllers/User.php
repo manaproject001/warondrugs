@@ -31,9 +31,13 @@ class User extends BaseController
         
         if($isDataValid){
             $upload = $this->request->getFile('file_upload');
+            $fotolama = $this->request->getPost('file_upload_old');
             if($upload->getName()==""){
-                $foto="Pria.jpg";
+                $foto=$fotolama;
             }else{
+                if($upload->getName() != 'Pria.jpg' || $upload->getName() != 'Wanita.jpg'){
+                    $delete = unlink( $_SERVER['DOCUMENT_ROOT']."/assets/images/admin/$fotolama");
+                }
                 $user_name=$this->request->getPost('username').".jpg";
                 $path = WRITEPATH . '../public/assets/images/admin/';
                 $upload->move($path,$user_name);

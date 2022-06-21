@@ -24,7 +24,10 @@ class PelakuModel extends Model
         'unit',
         'id_atasan',
         'id_kasus',
-        'foto'
+        'foto',
+        'id_penanganan',
+        'tempat_penanganan',
+        'tanggal_penangkapan'
 ];
     
     

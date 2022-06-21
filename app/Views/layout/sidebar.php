@@ -52,6 +52,9 @@
             <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="<?=site_url('admin/data/jenis_narkoba')?>">Jenis Narkoba</a></li>
             </ul>
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?=site_url('admin/data/penanganan')?>">Penanganan</a></li>
+            </ul>
         </div>
     </li>
 </ul>

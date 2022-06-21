@@ -85,14 +85,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Sebagai</label>
+                                    <label class="col-sm-3 col-form-label">Tanggal Penangkapan</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="profil" id="profil" onchange="show()" required>
-                                            <option>-- Pilih --</option>
-                                            <option value="Pengguna" <?= $pelaku['profil'] == 'Pengguna' ? 'selected':'' ?>>Pengguna</option>
-                                            <option value="Kurir" <?= $pelaku['profil'] == 'Kurir' ? 'selected':'' ?>>Kurir</option>
-                                            <option value="Bandar" <?= $pelaku['profil'] == 'Bandar' ? 'selected':'' ?>>Bandar</option>
-                                        </select>
+                                    <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="tanggal_penangkapan" value="<?= $pelaku['tanggal_penangkapan'] ?>" required/>
                                     </div>
                                 </div>
                             </div>
@@ -117,8 +112,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Lokasi</label>
@@ -135,8 +128,6 @@
                                 </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Unit</label>
@@ -153,18 +144,39 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Status Penanganan</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="id_penanganan">
+                                        <option value="0">-- Pilih --</option>
+                                            <?php foreach ($penanganan as $pen) : ?>
+                                                <option value="<?=$pen['id_penanganan']?>" <?= $pen['id_penanganan'] == $pelaku['id_penanganan'] ? 'selected':'' ?>><?=$pen['penanganan']?></option>
+                                            <?php endforeach ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Tempat Penanganan</label>
+                                    <div class="col-sm-9">
+                                    <input type="text" class="form-control" placeholder="Tempat Penanganan" name="tempat_penanganan" value="<?= $pelaku['tempat_penanganan'] ?>"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <p class="card-description"> Informasi Keterlibatan </p>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Kasus</label>
+                                    <label class="col-sm-3 col-form-label">Sebagai</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="id_kasus" id="id_kasus">
+                                        <select class="form-control" name="profil" id="profil" onchange="show()" required>
                                             <option>-- Pilih --</option>
-                                            <?php foreach ($kasuss as $kasus) : ?>
-                                                <option value="<?=$kasus['id_kasus']?>"<?= $kasus['id_kasus'] == $pelaku['id_kasus'] ? 'selected':'' ?>><?=$kasus['kasus']?></option>
-                                            <?php endforeach ?>  
+                                            <option value="Pengguna" <?= $pelaku['profil'] == 'Pengguna' ? 'selected':'' ?>>Pengguna</option>
+                                            <option value="Kurir" <?= $pelaku['profil'] == 'Kurir' ? 'selected':'' ?>>Kurir</option>
+                                            <option value="Bandar" <?= $pelaku['profil'] == 'Bandar' ? 'selected':'' ?>>Bandar</option>
                                         </select>
                                     </div>
                                 </div>
@@ -174,7 +186,7 @@
                                     <label class="col-sm-3 col-form-label">Keterlibatan Dengan</label>
                                     <div class="col-sm-9">
                                         <select class="form-control id_atasan" name="id_atasan" id="id_atasan" <?= $pelaku['profil'] == 'Bandar' ? 'disabled':'' ?> >
-                                        <option>-- Pilih --</option>
+                                        <option value="0">-- Pilih --</option>
                                             <?php foreach ($pelakus as $pel) : ?>
                                                 <option value="<?=$pel['id_pelaku']?>"<?= $pel['id_pelaku'] == $pelaku['id_atasan'] ? 'selected':'' ?>><?=$pel['nama']?> {<?=$pel['profil']?>} <?=$pel['kasus']?></option>
                                             <?php endforeach ?> 
@@ -182,6 +194,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Kasus</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" name="id_kasus" id="id_kasus">
+                                            <option value="0">-- Pilih --</option>
+                                            <?php foreach ($kasuss as $kasus) : ?>
+                                                <option value="<?=$kasus['id_kasus']?>"<?= $kasus['id_kasus'] == $pelaku['id_kasus'] ? 'selected':'' ?>><?=$kasus['kasus']?></option>
+                                            <?php endforeach ?>  
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                         <div class="row justify-content-md-center">
                             <div class="card col-6 align-self-center" >
@@ -213,8 +239,15 @@
 <script>
     function show(){
         document.getElementById("id_kasus").disabled = false;
-        document.getElementById("id_kasus").value = "-- Pilih --";
-        document.getElementById("id_atasan").value = "-- Pilih --";
+        document.getElementById("id_kasus").value = "0";
+        document.getElementById("id_atasan").value = "0";
+
+        var val = document.getElementById("profil").value;
+        if (val === "Bandar") {
+            document.getElementById("id_atasan").disabled = true;
+        }else{
+            document.getElementById("id_atasan").disabled = false;
+        }
     }
 </script>
 <script type="text/javascript">
