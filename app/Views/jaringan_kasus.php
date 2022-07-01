@@ -62,6 +62,7 @@
               '#802F74',
             ];
             const color = colors[d.depth % colors.length];
+            
             const imageDim = 80;
             const lightCircleDim = 95;
             const outsideCircleDim = 110;
@@ -83,7 +84,7 @@
                       
                    </div>
                </div>
-  `;
+              `;
           })
           .render();
       });

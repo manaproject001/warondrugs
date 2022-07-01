@@ -4,7 +4,7 @@
 <?php echo view('v_alert');?>
     <div class="page-header">
         <h3 class="page-title"> Data Kasus </h3>
-        <button type="button" class="nav-link btn btn-success create-new-button" data-bs-toggle="modal" data-bs-target="#exampleModal">Input Jenis Narkoba</button>
+        <button type="button" class="nav-link btn btn-success create-new-button" data-bs-toggle="modal" data-bs-target="#exampleModal">Input Kasus</button>
         
         <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
