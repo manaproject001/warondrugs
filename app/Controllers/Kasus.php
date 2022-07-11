@@ -21,6 +21,8 @@ class Kasus extends BaseController
         $pelaku = new PelakuViewModel();
         $data['pelakus'] = $pelaku->getWhere(['id_kasus' => $id])->getResultArray();
         $fpp = fopen($_SERVER['DOCUMENT_ROOT']."/data/data.csv", 'w');
+        echo $_SERVER['DOCUMENT_ROOT']."/data/data.csv";
+        die();
         $ar = array('name','imageUrl','positionName','id','parentId','narkoba','berat');
         fputcsv($fpp, $ar);
         foreach ($data['pelakus'] as $row) {
